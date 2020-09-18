@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "simple-address": "/components/simple-address/simple-address",
+    "m-search": "/components/mehaotian-search-revision/mehaotian-search-revision"
+  }
+}

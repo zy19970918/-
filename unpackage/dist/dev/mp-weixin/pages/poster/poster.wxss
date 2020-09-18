@@ -1,0 +1,236 @@
+
+textarea {
+	border: 2rpx solid rgb(17,150,219);
+	width: 90%;
+	min-height: 500rpx;
+}
+.bgImg {
+		display: block;
+		width: 100%;
+		height: 366rpx;
+}
+.mine {
+		display: block;
+		text-align: center;
+		color: #333;
+		margin-top: 44rpx;
+}
+.code {
+		display: block;
+		text-align: center;
+		color: #333;
+		font-size: 76rpx;
+		font-weight: bold;
+		margin-top: 30rpx;
+}
+.who {
+		display: block;
+		margin-top: 80rpx;
+		font-size: 32rpx;
+		color: #333;
+		text-align: center;
+}
+.inputBox {
+		text-align: center;
+		margin-top: 44rpx;
+}
+.input {
+		text-align: center;
+		width: 440rpx;
+		height: 88rpx;
+		border-radius: 44rpx;
+		background: #f5f5f5;
+		font-size: 32rpx;
+		display: inline-block;
+}
+.btn {
+		width: 160rpx;
+		height: 88rpx;
+		border-radius: 44rpx;
+		background: -webkit-linear-gradient(left, rgba(255, 226, 0, 1), rgba(255, 200, 11, 1));
+		background: linear-gradient(90deg, rgba(255, 226, 0, 1), rgba(255, 200, 11, 1));
+		box-shadow: 0px 4px 8px 0px rgba(255, 200, 11, 0.5);
+		color: #333;
+		font-size: 32rpx;
+		display: inline-block;
+		line-height: 88rpx;
+		margin-left: 40rpx;
+}
+button[class="btn"]::after {
+		border: 0;
+}
+.tishi {
+		display: block;
+		text-align: center;
+		color: #999;
+		margin-top: 30rpx;
+}
+.shareText {
+		display: block;
+		text-align: center;
+		color: #333;
+		font-size: 28rpx;
+		margin-top: 100rpx;
+}
+.imgBox {
+		text-align: center;
+		width: 100%;
+		margin-top: 60rpx;
+		padding-bottom: 120rpx;
+}
+.img {
+		display: inline-block;
+		width: 100%;
+		height: 100%;
+}
+.m_l {
+		margin-left: 180rpx;
+}
+.zfbtn {
+		display: inline-block;
+		width: 120rpx;
+		height: 120rpx;
+		border-radius: 50%;
+		background: transparent;
+		outline: none;
+		border: 0;
+		padding: 0;
+}
+button[class="zfbtn"]::after {
+		border: 0;
+}
+button[class="zfbtn m_l"]::after {
+		border: 0;
+}
+.imagePathBox {
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.7);
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 10;
+}
+.shengcheng {
+		width: 80%;
+		height: 80%;
+		position: fixed;
+		top: 50rpx;
+		left: 50%;
+		margin-left: -40%;
+		z-index: 10;
+}
+.baocun {
+		display: block;
+		width: 80%;
+		height: 80rpx;
+		padding: 0;
+		line-height: 80rpx;
+		text-align: center;
+		position: fixed;
+		bottom: 20rpx;
+		left: 10%;
+		background: #ffe200;
+		color: #333;
+		font-size: 32rpx;
+		border-radius: 44rpx;
+}
+button[class="baocun"]::after {
+		border: 0;
+}
+canvas {
+		/* letter-spacing: 10rpx !important; */
+}
+.ceshi_swiper {
+	  width: 599rpx;
+	  margin: 10rpx auto;
+	  position: relative;
+}
+.ceshi_prew text {
+	  color: #fff;
+	  font-size: 30rpx;
+	  float: left;
+	  margin-top: 15rpx;
+}
+.ceshi_next text {
+	  color: #fff;
+	  font-size: 30rpx;
+	  display: block;
+	  float: right;
+	  margin-top: 15rpx;
+}
+.ceshi_next {
+	  width: 40rpx;
+	  height: 80rpx;
+	  position: absolute;
+	  top: 480rpx;
+	  right: 20rpx;
+	  background-color: rgba(0, 0, 0, 0.5);
+	 border-top-right-radius: 80rpx;
+	 border-bottom-right-radius: 80rpx;
+}
+.ceshi_prew {
+	  width: 40rpx;
+	  height: 80rpx;
+	  position: absolute;
+	  top: 480rpx;
+	  left: 20rpx;
+	  background-color: rgba(0, 0, 0, 0.5);
+	  border-top-left-radius: 80rpx;
+	  border-bottom-left-radius: 80rpx;
+}
+.zuopin_qh {
+	  float: left;
+}
+.read_kecheng {
+	  background: #fff;
+}
+.zuopin {
+	  overflow: hidden;
+	  margin: 10rpx auto;
+	  background: #fff;
+	  width: 610rpx;
+	  padding-top: 10rpx;
+	  padding-bottom: 10rpx;
+}
+.zuopin_qh {
+	  margin-left: 15rpx;
+	  margin-right: 15rpx;
+}
+.zuopin_qh image{  box-shadow: 0 0 10px #dadada;}
+.zuopinr {
+	  background: #f2b91c;
+	  width: 48rpx;
+	  height: 48rpx;
+	  border-radius: 48rpx;
+	  color: #fff;
+	  font-size: 35rpx;
+	  text-align: center;
+	  right: 20rpx;
+	  position: absolute;
+	  top: 160rpx;
+}
+.zuopinl {
+	  background: #f2b91c;
+	  width: 48rpx;
+	  height: 48rpx;
+	  border-radius: 48rpx;
+	  color: #fff;
+	  font-size: 35rpx;
+	  text-align: center;
+	  left: 20rpx;
+	  position: absolute;
+	  top: 160rpx;
+}
+.zuopin_read {
+	  position: relative;
+}
+swiper.zuopin_read_swiper{height: 500rpx;}
+swiper.zuopin_read_swiper{height: 500rpx;}
+.ceshi_swiper image{width: 599rpx;height:323rpx;}
+.ceshi_swiper2 image{width: 626rpx;height:337rpx;}
+swiper.ceshi_swiper_s{height: 337rpx;}
+swiper.read_swiper{height: 323rpx;}
+

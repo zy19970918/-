@@ -1,0 +1,45 @@
+
+.table {
+	  border: 0px solid darkgray;
+}
+.tr {
+	  display: -webkit-box;
+	  display: -webkit-flex;
+	  display: flex;
+	  width: 100%;
+	  -webkit-box-pack: center;
+	  -webkit-justify-content: center;
+	          justify-content: center;
+	  border-bottom: 1rpx solid rgb(245,245,245);
+	  /* height: 3rem;
+ */
+	  -webkit-box-align: center;
+	  -webkit-align-items: center;
+	          align-items: center;
+}
+.td {
+	    width:40%;
+		font-weight: 500;
+	    -webkit-box-pack: center;
+	    -webkit-justify-content: center;
+	            justify-content: center;
+	    text-align: center;
+}
+.th {
+	  width: 40%;
+	  -webkit-box-pack: center;
+	  -webkit-justify-content: center;
+	          justify-content: center;
+	  color:rgba(190, 142, 88, 1);
+	  display: -webkit-box;
+	  display: -webkit-flex;
+	  display: flex;
+	  border: 1rpx solid rgb(245,245,245);
+	  /* height: 72rpx;
+ */
+	  -webkit-box-align: center;
+	  -webkit-align-items: center;
+	          align-items: center;
+}
+	
+

@@ -1,0 +1,52 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/commission/commission",
+    "pages/mine/mine",
+    "pages/login/login",
+    "pages/getPhone/getPhone",
+    "pages/CommissionRecords/CommissionRecords",
+    "pages/My_concerns/My_concerns",
+    "pages/Withdrawal_record/Withdrawal_record",
+    "pages/Service_address_book/Service_address_book",
+    "pages/detail/detail",
+    "pages/mymation/mymation",
+    "pages/poster/poster",
+    "pages/addBank/addBank",
+    "pages/set/set",
+    "pages/tixian/tixian"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "劳务通讯录",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "static/imgs/icon_shouye.png",
+        "selectedIconPath": "static/imgs/icon_sshouye.png",
+        "navigationBarBackgroundColor": "#000000"
+      },
+      {
+        "pagePath": "pages/commission/commission",
+        "text": "佣金",
+        "iconPath": "static/imgs/icon_yongjin.png",
+        "selectedIconPath": "/static/imgs/icon_yongjin_xuanzhong.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "static/imgs/icon_wode.png",
+        "selectedIconPath": "./static/imgs/icon_swode.png"
+      }
+    ],
+    "selectedColor": "#666666"
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap12.json"
+}
