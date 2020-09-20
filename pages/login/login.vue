@@ -74,23 +74,47 @@
 					                          wx.login({
 					                              success: res => {
 													   console.log(4)
+													   console.log(res)
 					                                  // 获取到用户的 code 之后：res.code
 					                                  console.log("用户的code:" + res.code);
 					                                  // 可以传给后台，再经过解析获取用户的 openid
 					                                  // 或者可以直接使用微信的提供的接口直接获取 openid ，方法如下：
-					                                  wx.request({
-					                                      // 自行补上自己的 APPID 和 SECRET
-					                                      url: 'https://api.weixin.qq.com/sns/jscode2session?appid=wxd26f46560a42f999&secret=cd1d26f1681f0206ef9f3e2c421b0976&js_code=' + res.code + '&grant_type=authorization_code',
-					                                      success: res => {
-															   console.log(5)
-					                                          // 获取到用户的 openid
-															  uni.setStorageSync('openid',res.data.openid)
-															  uni.setStorageSync('session_key',res.data.session_key)
-															uni.reLaunch({
-																url:'../getPhone/getPhone'
-															})
-					                                      }
-					                                  });
+					          //                         wx.request({
+					          //                             // 自行补上自己的 APPID 和 SECRET
+					          //                             // url: 'https://api.weixin.qq.com/sns/jscode2session?appid=wxd26f46560a42f999&secret=cd1d26f1681f0206ef9f3e2c421b0976&js_code=' + res.code + '&grant_type=authorization_code',
+					          //                             success: res => {
+															//    console.log(5)
+					          //                                 // 获取到用户的 openid
+															// uni.setStorageSync('openid',res.data.openid)
+															// uni.setStorageSync('session_key',res.data.session_key)
+															// uni.reLaunch({
+															// 	url:'../getPhone/getPhone'
+															// })
+					          //                             }
+					          //                         });
+							        //                      that.$http.postRequest('/wechat/getOpenId',{js_code:res.code}).then(res=>{
+															//  uni.setStorageSync('openid',res.data.openid)
+															//  uni.setStorageSync('session_key',res.data.session_key)
+															//  uni.reLaunch({
+															//  	url:'../getPhone/getPhone'
+															//  })
+														 // })
+														 uni.request({
+														 	header:{
+																'content-type': 'application/x-www-form-urlencoded'
+															},
+															url:"https://www.xn--4gqr6isbv1bn21d.com/api/wechat/getOpenId",
+															method:'POST',
+															data:{js_code:res.code},
+															success(res) {
+																console.log(res)
+																 uni.setStorageSync('openid',res.data.data.openid)
+																 uni.setStorageSync('session_key',res.data.data.sessionKey)
+																 uni.reLaunch({
+																 	url:'../getPhone/getPhone'
+																 })
+															}
+														 })
 					                              }
 					                          });
 					                      }

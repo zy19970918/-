@@ -12,9 +12,9 @@
 /* 10 */,
 /* 11 */,
 /* 12 */
-/*!**************************************************************************!*\
-  !*** E:/project/Maillist_World/main.js?{"page":"pages%2Findex%2Findex"} ***!
-  \**************************************************************************/
+/*!******************************************************************!*\
+  !*** F:/Maillist_World/main.js?{"page":"pages%2Findex%2Findex"} ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27,9 +27,9 @@ createPage(_index.default);
 
 /***/ }),
 /* 13 */
-/*!*******************************************************!*\
-  !*** E:/project/Maillist_World/pages/index/index.vue ***!
-  \*******************************************************/
+/*!***********************************************!*\
+  !*** F:/Maillist_World/pages/index/index.vue ***!
+  \***********************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -67,9 +67,9 @@ component.options.__file = "pages/index/index.vue"
 
 /***/ }),
 /* 14 */
-/*!**************************************************************************************************!*\
-  !*** E:/project/Maillist_World/pages/index/index.vue?vue&type=template&id=57280228&scoped=true& ***!
-  \**************************************************************************************************/
+/*!******************************************************************************************!*\
+  !*** F:/Maillist_World/pages/index/index.vue?vue&type=template&id=57280228&scoped=true& ***!
+  \******************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -88,9 +88,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 /* 15 */
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/project/Maillist_World/pages/index/index.vue?vue&type=template&id=57280228&scoped=true& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!F:/Maillist_World/pages/index/index.vue?vue&type=template&id=57280228&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -121,9 +121,9 @@ render._withStripped = true
 
 /***/ }),
 /* 16 */
-/*!********************************************************************************!*\
-  !*** E:/project/Maillist_World/pages/index/index.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************/
+/*!************************************************************************!*\
+  !*** F:/Maillist_World/pages/index/index.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -136,9 +136,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 /* 17 */
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/project/Maillist_World/pages/index/index.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!F:/Maillist_World/pages/index/index.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -268,6 +268,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log('modal关闭');
     },
     pay: function pay() {
+      console.log('11111');
       var that = this;
       var userid = uni.getStorageSync('userId');
       var openid = uni.getStorageSync('openid');
@@ -276,7 +277,7 @@ __webpack_require__.r(__webpack_exports__);
         header: {
           'content-type': 'application/x-www-form-urlencoded' },
 
-        url: 'http://www.35logo.cn:8886/pay/payMoney',
+        url: 'https://www.xn--4gqr6isbv1bn21d.com/api/pay/payMoney',
         method: 'POST',
         data: {
           userId: userid.userId,
@@ -284,6 +285,7 @@ __webpack_require__.r(__webpack_exports__);
           openid: openid },
 
         success: function success(res) {
+          console.log('dhuwhdiwdyw89');
           wx.requestPayment({
             timeStamp: res.data.data.timeStamp,
             nonceStr: res.data.data.nonceStr,
@@ -305,7 +307,6 @@ __webpack_require__.r(__webpack_exports__);
       this.$http.postRequest('/user/queryMoney').then(function (res) {
         _this2.money = res;
         uni.setStorageSync('miniMoney', res.miniMoney);
-        console.log("hahahahah");
       });
     },
     toDetail: function toDetail(item) {
@@ -403,7 +404,6 @@ __webpack_require__.r(__webpack_exports__);
       var companyId = uni.getStorageSync('companyId');
       var that = this;
       if (that.cont == false) {
-        console.log("不是会员");
         uni.showModal({
           title: "你还未加入我们，请先加入我们!",
           content: "\u652F\u4ED8".concat(that.money.standMoney, "\u5143\uFF0C\u5F00\u901A").concat(that.money.months, "\u4E2A\u6708\u4F1A\u5458,\u53EF\u6D4F\u89C8").concat(that.money.browseCount, "\u6761\u4FE1\u606F!"),
@@ -411,10 +411,12 @@ __webpack_require__.r(__webpack_exports__);
           confirmText: "申请加入",
           success: function success(res) {
             if (res.confirm) {
-              console.log("执行");
               that.ADD();
             } else {
-              console.log("取消");
+              uni.showToast({
+                title: "参数错误",
+                icon: "none" });
+
             }
           } });
 
@@ -457,8 +459,6 @@ __webpack_require__.r(__webpack_exports__);
         userId: userid.userId,
         companyId: companyId }).
       then(function (res) {
-        console.log(res);
-        console.log("sssssssssssssssssssss");
         _this4.list = res;
       });
       this.$http.postRequest('/notice/query').then(function (res) {
@@ -484,7 +484,10 @@ __webpack_require__.r(__webpack_exports__);
             if (res.confirm) {
               that.ADD();
             } else {
-              console.log("取消");
+              uni.showToast({
+                title: "参数错误",
+                icon: "none" });
+
             }
           } });
 
@@ -503,7 +506,6 @@ __webpack_require__.r(__webpack_exports__);
         userId: userid.userId,
         focusData: item.focusData }).
       then(function (res) {
-        console.log(res);
         if (res.msg == 1) {
           uni.showToast({
             title: "关注成功",
@@ -526,7 +528,10 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     uniNoticeBar: uniNoticeBar },
 
-  onLoad: function onLoad() {
+  onLoad: function onLoad(options) {
+    if (options.scene) {
+      uni.setStorageSync('scene', options.scene);
+    }
     this.getmoney();
     this.getuserInfo();
     this.getXieyi();
@@ -550,9 +555,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 /* 18 */
-/*!*****************************************************************************************************************!*\
-  !*** E:/project/Maillist_World/pages/index/index.vue?vue&type=style&index=0&id=57280228&scoped=true&lang=scss& ***!
-  \*****************************************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** F:/Maillist_World/pages/index/index.vue?vue&type=style&index=0&id=57280228&scoped=true&lang=scss& ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -565,9 +570,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 /* 19 */
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--8-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-2!./node_modules/postcss-loader/src??ref--8-oneOf-1-3!./node_modules/sass-loader/dist/cjs.js??ref--8-oneOf-1-4!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/project/Maillist_World/pages/index/index.vue?vue&type=style&index=0&id=57280228&scoped=true&lang=scss& ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--8-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-2!./node_modules/postcss-loader/src??ref--8-oneOf-1-3!./node_modules/sass-loader/dist/cjs.js??ref--8-oneOf-1-4!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!F:/Maillist_World/pages/index/index.vue?vue&type=style&index=0&id=57280228&scoped=true&lang=scss& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

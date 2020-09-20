@@ -123,6 +123,7 @@
 				console.log('modal关闭')
 			},
 			pay() {
+				console.log('11111')
 				var that = this
 				var userid = uni.getStorageSync('userId')
 				var openid = uni.getStorageSync('openid')
@@ -131,7 +132,7 @@
 					header: {
 						'content-type': 'application/x-www-form-urlencoded'
 					},
-					url: 'http://www.35logo.cn:8886/pay/payMoney',
+					url: 'https://www.xn--4gqr6isbv1bn21d.com/api/pay/payMoney',
 					method: 'POST',
 					data: {
 						userId: userid.userId,
@@ -139,6 +140,7 @@
 						openid: openid
 					},
 					success(res) {
+						console.log('dhuwhdiwdyw89')
 						wx.requestPayment({
 							timeStamp: res.data.data.timeStamp,
 							nonceStr: res.data.data.nonceStr,
@@ -160,7 +162,6 @@
 				this.$http.postRequest('/user/queryMoney').then(res => {
 					this.money = res
 					uni.setStorageSync('miniMoney', res.miniMoney)
-					console.log("hahahahah")
 				})
 			},
 			toDetail(item) {
@@ -258,7 +259,6 @@
 				var companyId = uni.getStorageSync('companyId')
 				var that = this
 				if (that.cont == false) {
-					console.log("不是会员")
 					uni.showModal({
 						title: "你还未加入我们，请先加入我们!",
 						content: `支付${that.money.standMoney}元，开通${that.money.months}个月会员,可浏览${that.money.browseCount}条信息!`,
@@ -266,10 +266,12 @@
 						confirmText: "申请加入",
 						success(res) {
 							if (res.confirm) {
-								console.log("执行")
 								that.ADD()
 							} else {
-								console.log("取消")
+								uni.showToast({
+									title:"参数错误",
+									icon:"none"
+								})
 							}
 						}
 					})
@@ -312,8 +314,6 @@
 					userId: userid.userId,
 					companyId: companyId
 				}).then(res => {
-					console.log(res)
-					console.log("sssssssssssssssssssss")
 					this.list = res
 				})
 				this.$http.postRequest('/notice/query').then(res => {
@@ -339,7 +339,10 @@
 							if (res.confirm) {
 								that.ADD()
 							} else {
-								console.log("取消")
+								uni.showToast({
+									title:"参数错误",
+									icon:"none"
+								})
 							}
 						}
 					})
@@ -358,7 +361,6 @@
 					userId: userid.userId,
 					focusData: item.focusData
 				}).then(res => {
-					console.log(res)
 					if (res.msg == 1) {
 						uni.showToast({
 							title: "关注成功",
@@ -381,7 +383,10 @@
 		components: {
 			uniNoticeBar
 		},
-		onLoad() {
+		onLoad(options) {
+			if(options.scene) {
+				uni.setStorageSync('scene',options.scene)
+			}
 			this.getmoney()
 			this.getuserInfo()
 			this.getXieyi()

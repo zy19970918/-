@@ -202,7 +202,7 @@
 			getimg() {
 				this.$http.postRequest('/banner/query').then(res=>{        //跳转网页
 					this.link=res.linkAddr
-					this.bannerImg='http://www.35logo.cn:8080'+res.bannerImg
+					this.bannerImg='http://118.178.89.161:8080'+res.bannerImg
 				})
 				this.$http.postRequest('/communicate/query').then(res=>{   //劳务交流二维码
 					 this.code=res.communicationQcode

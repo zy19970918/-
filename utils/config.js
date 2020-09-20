@@ -1,4 +1,4 @@
-const commonUrl = "https://www.35logo.cn:8886" //公共路径
+const commonUrl = "https://www.xn--4gqr6isbv1bn21d.com/api"
 // post请求封装
 function postRequest(url, data) {
 	var promise = new Promise((resolve, reject) => {
@@ -51,7 +51,6 @@ function getRequest(url, data) {
 	});
 	return promise;
 }
-
 
 module.exports = {
 	postRequest,

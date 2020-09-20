@@ -1697,13 +1697,13 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 11:
-/*!*************************************************!*\
-  !*** E:/project/Maillist_World/utils/config.js ***!
-  \*************************************************/
+/*!*****************************************!*\
+  !*** F:/Maillist_World/utils/config.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(uni) {var commonUrl = "https://www.35logo.cn:8886"; //公共路径
+/* WEBPACK VAR INJECTION */(function(uni) {var commonUrl = "https://www.xn--4gqr6isbv1bn21d.com/api";
 // post请求封装
 function postRequest(url, data) {var _this = this;
   var promise = new Promise(function (resolve, reject) {
@@ -1757,7 +1757,6 @@ function getRequest(url, data) {var _this2 = this;
   return promise;
 }
 
-
 module.exports = {
   postRequest: postRequest,
   getRequest: getRequest };
@@ -1766,9 +1765,9 @@ module.exports = {
 /***/ }),
 
 /***/ 116:
-/*!************************************************!*\
-  !*** E:/project/Maillist_World/utils/utils.js ***!
-  \************************************************/
+/*!****************************************!*\
+  !*** F:/Maillist_World/utils/utils.js ***!
+  \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1796,9 +1795,9 @@ module.exports = {
 /***/ }),
 
 /***/ 162:
-/*!*********************************************************************************!*\
-  !*** E:/project/Maillist_World/components/simple-address/city-data/province.js ***!
-  \*********************************************************************************/
+/*!*************************************************************************!*\
+  !*** F:/Maillist_World/components/simple-address/city-data/province.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1951,9 +1950,9 @@ provinceData;exports.default = _default;
 /***/ }),
 
 /***/ 163:
-/*!*****************************************************************************!*\
-  !*** E:/project/Maillist_World/components/simple-address/city-data/city.js ***!
-  \*****************************************************************************/
+/*!*********************************************************************!*\
+  !*** F:/Maillist_World/components/simple-address/city-data/city.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3465,9 +3464,9 @@ cityData;exports.default = _default;
 /***/ }),
 
 /***/ 164:
-/*!*****************************************************************************!*\
-  !*** E:/project/Maillist_World/components/simple-address/city-data/area.js ***!
-  \*****************************************************************************/
+/*!*********************************************************************!*\
+  !*** F:/Maillist_World/components/simple-address/city-data/area.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16024,9 +16023,9 @@ areaData;exports.default = _default;
 /***/ }),
 
 /***/ 179:
-/*!***************************************************************!*\
-  !*** E:/project/Maillist_World/components/uni-icons/icons.js ***!
-  \***************************************************************/
+/*!*******************************************************!*\
+  !*** F:/Maillist_World/components/uni-icons/icons.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22986,9 +22985,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 29:
-/*!****************************************************!*\
-  !*** E:/project/Maillist_World/utils/base64src.js ***!
-  \****************************************************/
+/*!********************************************!*\
+  !*** F:/Maillist_World/utils/base64src.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23053,9 +23052,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 4:
-/*!********************************************!*\
-  !*** E:/project/Maillist_World/pages.json ***!
-  \********************************************/
+/*!************************************!*\
+  !*** F:/Maillist_World/pages.json ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 

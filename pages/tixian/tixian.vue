@@ -70,7 +70,7 @@
 						'content-type': 'application/x-www-form-urlencoded'
 					},
 					method:'POST',
-					url:"http://www.35logo.cn:8886/pay/payTakeMoney",
+					url:"https://www.xn--4gqr6isbv1bn21d.com/pay/payTakeMoney",
 					data:{
 						openid:openid,
 						userId:userid.userId,

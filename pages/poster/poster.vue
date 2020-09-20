@@ -29,13 +29,13 @@
 			<button class='baocun' @click='baocun'>保存相册，分享到朋友圈</button>
 		</view>
 		<view :hidden="maskHidden == false" class="mask"></view>
-		<cover-view class="canvas-box" >
+		<view class="canvas-box" >
 			<canvas style="width: 375px;height: 667px;position:fixed;top:9999px;z-index: 99999;" canvas-id="mycanvas" />
 			<canvas style="width: 375px;height: 667px;position:fixed;top:9999px;z-index: 99999;" canvas-id="mycanvasa" />
 			<canvas style="width: 375px;height: 667px;position:fixed;top:9999px;z-index: 99999;" canvas-id="mycanvasb" />
 			<canvas style="width: 375px;height: 667px;position:fixed;top:9999px;z-index: 99999;" canvas-id="mycanvasc" />
 			<canvas style="width: 375px;height: 667px;position:fixed;top:9999px;z-index: 99999;" canvas-id="mycanvasd" />
-		</cover-view>
+		</view>
 	</view>
 </template>
 

@@ -48,12 +48,12 @@
 					<image :src="item" class='shengcheng'></image>
 				</swiper-item>
 			</swiper>
-			  <view class='ceshi_next' @click='prevImg'>
-			      <text class='icon iconfont icon-you'></text>
-			    </view>
-			    <view class='ceshi_prew' @click='nextImg'>
-			      <text class='icon iconfont icon-zuo'></text>
-			    </view>
+			<view class='ceshi_next' @click='prevImg'>
+				<text class='icon iconfont icon-you'></text>
+			</view>
+			<view class='ceshi_prew' @click='nextImg'>
+				<text class='icon iconfont icon-zuo'></text>
+			</view>
 			<button class='baocun' @click='baocun'>保存相册，分享到朋友圈</button>
 		</view>
 		<view :hidden="maskHidden == false" class="mask"></view>
@@ -92,7 +92,7 @@
 				drawalMoney: '', //累计提现，
 				counts: '', //可提现
 				miniMoney: '', //标准
-				count:0
+				count: 0
 			}
 		},
 		onLoad() {
@@ -121,26 +121,26 @@
 		methods: {
 			prevImg() {
 				console.log("加")
-				if(this.count<2) {
+				if (this.count < 2) {
 					++this.count
 				}
 			},
 			nextImg() {
-				if(this.count>0) {
+				if (this.count > 0) {
 					--this.count
 				}
 			},
 			getmoney() { //获取可提现
-			var that=this
+				var that = this
 				var userid = uni.getStorageSync('userId')
 				that.$http.postRequest('/user/query', {
 					userId: userid.userId
 				}).then(res => {
-					var a=res.returnMoney
+					var a = res.returnMoney
 					console.log("天线")
 					console.log(res)
-					that.drawalMoney=res.drawalMoney;
-					that.counts= a.toString()
+					that.drawalMoney = res.drawalMoney;
+					that.counts = a.toString()
 				})
 			},
 			tixian() {
@@ -186,28 +186,51 @@
 				})
 			},
 			eq() {
+				console.log("执行")
 				var that = this
-				wx.request({
-					url: "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxd26f46560a42f999&secret=cd1d26f1681f0206ef9f3e2c421b0976",
-					method: 'GET',
+				// wx.request({
+				// 	url: "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxd26f46560a42f999&secret=cd1d26f1681f0206ef9f3e2c421b0976",
+				// 	method: 'GET',
+				// 	success(res) {
+				// 		console.log(res)
+				// 		console.log("token")
+				// 		wx.request({
+				// 			url: `https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=${res.data.access_token}`,
+				// 			method: 'POST',
+				// 			responseType:'arraybuffer',
+				// 			data: {
+				// 				scene: "code:1",
+				// 				is_hyaline: true
+				// 			},
+				// 			success(res) {
+				// 				console.log(res)
+				// 				const base64 = wx.arrayBufferToBase64(res.data).toString();
+				// 				that.erweima = "data:image/PNG;base64," + base64
+				// 				that.text(that.erweima)
+				// 			},
+				// 			fail(err) {
+				// 				console.log(err)
+				// 			}
+				// 		})
+				// 	}
+				// })/wechat/getAccessToken
+				// const wxOpenId = uni.getStorageSync('openid')
+				const userid = uni.getStorageSync('userId')
+				var obj = {}
+				obj.userid = userid.userId
+				obj.openid = userid.openid
+				uni.request({
+					header: {
+						'content-type': 'application/x-www-form-urlencoded'
+					},
+					url: "https://www.xn--4gqr6isbv1bn21d.com/api/wechat/getAccessToken",
+					method: 'POST',
+					data: {
+						scene: obj.userid
+					},
 					success(res) {
-						wx.request({
-							url: `https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=${res.data.access_token}`,
-							method: 'POST',
-							responseType: 'arraybuffer',
-							data: {
-								scene: "code:1",
-								is_hyaline: true
-							},
-							success(res) {
-								const base64 = wx.arrayBufferToBase64(res.data).toString();
-								that.erweima = "data:image/PNG;base64," + base64
-								that.text(that.erweima)
-							},
-							fail(err) {
-								console.log(err)
-							}
-						})
+						that.erweima = "data:image/PNG;base64," + res.data.data.qcode
+						that.text(that.erweima)
 					}
 				})
 				that.urlList.forEach(item => {
@@ -267,7 +290,7 @@
 				// context.fillText(that.code, 185, 435);
 				context.stroke();
 				//绘制左下角文字背景图
-				context.drawImage(path4, 115, 432, 150, 150);
+				context.drawImage(path4, 115, 420, 150, 150);
 				context.setFontSize(12);
 				context.setFillStyle('#ffe200');
 				context.setTextAlign('left');
@@ -503,49 +526,49 @@
 					success(res) {
 						console.log("xixixixixixi")
 						if (!res.authSetting['scope.writePhotosAlbum']) {
-					  wx.authorize({
-					          scope: 'scope.writePhotosAlbum',
-					          success () {
-					            wx.saveImageToPhotosAlbum({
-					            	filePath: imagepath,
-					            	success(res) {
-					            		wx.showModal({
-					            			content: '图片已保存到相册，赶紧晒一下吧~',
-					            			showCancel: false,
-					            			confirmText: '好的',
-					            			confirmColor: '#333',
-					            			success: function(res) {
-					            				console.log(res)
-					            				if (res.confirm) {
-					            					console.log('用户点击确定');
-					            					/* 该隐藏的隐藏 */
-					            					that.maskHidden = false
-					            				}
-					            			},
-					            			fail: function(res) {
-					            				console.log(11111)
-					            			}
-					            		})
-					            	},
-					            	fail(err) {
-					            		console.log('2222222222')
-					            		console.log(imagepath)
-					            		console.log(err)
-					            	}
-					            })
-					          },
-					          // 拒绝授权时，则进入手机设置页面，可进行授权设置
-					          fail() {
-					            wx.openSetting({
-					              success: function (data) {
-					                console.log("openSetting success");
-					              },
-					              fail: function (data) {
-					                console.log("openSetting fail");
-					              }
-					            });
-					          }
-					        })
+							wx.authorize({
+								scope: 'scope.writePhotosAlbum',
+								success() {
+									wx.saveImageToPhotosAlbum({
+										filePath: imagepath,
+										success(res) {
+											wx.showModal({
+												content: '图片已保存到相册，赶紧晒一下吧~',
+												showCancel: false,
+												confirmText: '好的',
+												confirmColor: '#333',
+												success: function(res) {
+													console.log(res)
+													if (res.confirm) {
+														console.log('用户点击确定');
+														/* 该隐藏的隐藏 */
+														that.maskHidden = false
+													}
+												},
+												fail: function(res) {
+													console.log(11111)
+												}
+											})
+										},
+										fail(err) {
+											console.log('2222222222')
+											console.log(imagepath)
+											console.log(err)
+										}
+									})
+								},
+								// 拒绝授权时，则进入手机设置页面，可进行授权设置
+								fail() {
+									wx.openSetting({
+										success: function(data) {
+											console.log("openSetting success");
+										},
+										fail: function(data) {
+											console.log("openSetting fail");
+										}
+									});
+								}
+							})
 						} else {
 							console.log('22222222225555555555555555')
 							wx.saveImageToPhotosAlbum({
@@ -796,114 +819,138 @@
 	button[class="baocun"]::after {
 		border: 0;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
 	.ceshi_swiper {
-	  width: 599rpx;
-	  margin: 10rpx auto;
-	  position: relative;
+		width: 599rpx;
+		margin: 10rpx auto;
+		position: relative;
 	}
-	
+
 	.ceshi_prew text {
-	  color: #fff;
-	  font-size: 30rpx;
-	  float: left;
-	  margin-top: 15rpx;
+		color: #fff;
+		font-size: 30rpx;
+		float: left;
+		margin-top: 15rpx;
 	}
-	
+
 	.ceshi_next text {
-	  color: #fff;
-	  font-size: 30rpx;
-	  display: block;
-	  float: right;
-	  margin-top: 15rpx;
+		color: #fff;
+		font-size: 30rpx;
+		display: block;
+		float: right;
+		margin-top: 15rpx;
 	}
-	
+
 	.ceshi_next {
-	  width: 40rpx;
-	  height: 80rpx;
-	  position: absolute;
-	  top: 480rpx;
-	  right: 20rpx;
-	  background-color: rgba(0, 0, 0, 0.5);
-	 border-top-right-radius: 80rpx;
-	 border-bottom-right-radius: 80rpx;
+		width: 40rpx;
+		height: 80rpx;
+		position: absolute;
+		top: 480rpx;
+		right: 20rpx;
+		background-color: rgba(0, 0, 0, 0.5);
+		border-top-right-radius: 80rpx;
+		border-bottom-right-radius: 80rpx;
 	}
-	
+
 	.ceshi_prew {
-	  width: 40rpx;
-	  height: 80rpx;
-	  position: absolute;
-	  top: 480rpx;
-	  left: 20rpx;
-	  background-color: rgba(0, 0, 0, 0.5);
-	  border-top-left-radius: 80rpx;
-	  border-bottom-left-radius: 80rpx;
+		width: 40rpx;
+		height: 80rpx;
+		position: absolute;
+		top: 480rpx;
+		left: 20rpx;
+		background-color: rgba(0, 0, 0, 0.5);
+		border-top-left-radius: 80rpx;
+		border-bottom-left-radius: 80rpx;
 	}
-	
+
 	.zuopin_qh {
-	  float: left;
+		float: left;
 	}
-	
+
 	.read_kecheng {
-	  background: #fff;
+		background: #fff;
 	}
-	
+
 	.zuopin {
-	  overflow: hidden;
-	  margin: 10rpx auto;
-	  background: #fff;
-	  width: 610rpx;
-	  padding-top: 10rpx;
-	  padding-bottom: 10rpx;
+		overflow: hidden;
+		margin: 10rpx auto;
+		background: #fff;
+		width: 610rpx;
+		padding-top: 10rpx;
+		padding-bottom: 10rpx;
 	}
-	
+
 	.zuopin_qh {
-	  margin-left: 15rpx;
-	  margin-right: 15rpx;
+		margin-left: 15rpx;
+		margin-right: 15rpx;
 	}
-	.zuopin_qh image{  box-shadow: 0 0 10px #dadada;}
+
+	.zuopin_qh image {
+		box-shadow: 0 0 10px #dadada;
+	}
+
 	.zuopinr {
-	  background: #f2b91c;
-	  width: 48rpx;
-	  height: 48rpx;
-	  border-radius: 48rpx;
-	  color: #fff;
-	  font-size: 35rpx;
-	  text-align: center;
-	  right: 20rpx;
-	  position: absolute;
-	  top: 160rpx;
+		background: #f2b91c;
+		width: 48rpx;
+		height: 48rpx;
+		border-radius: 48rpx;
+		color: #fff;
+		font-size: 35rpx;
+		text-align: center;
+		right: 20rpx;
+		position: absolute;
+		top: 160rpx;
 	}
-	
+
 	.zuopinl {
-	  background: #f2b91c;
-	  width: 48rpx;
-	  height: 48rpx;
-	  border-radius: 48rpx;
-	  color: #fff;
-	  font-size: 35rpx;
-	  text-align: center;
-	  left: 20rpx;
-	  position: absolute;
-	  top: 160rpx;
+		background: #f2b91c;
+		width: 48rpx;
+		height: 48rpx;
+		border-radius: 48rpx;
+		color: #fff;
+		font-size: 35rpx;
+		text-align: center;
+		left: 20rpx;
+		position: absolute;
+		top: 160rpx;
 	}
-	
+
 	.zuopin_read {
-	  position: relative;
+		position: relative;
 	}
-	swiper.zuopin_read_swiper{height: 500rpx;}
-	swiper.zuopin_read_swiper{height: 500rpx;}
-	.ceshi_swiper image{width: 599rpx;height:323rpx;}
-	.ceshi_swiper2 image{width: 626rpx;height:337rpx;}
-	swiper.ceshi_swiper_s{height: 337rpx;}
-	swiper.read_swiper{height: 323rpx;}
+
+	swiper.zuopin_read_swiper {
+		height: 500rpx;
+	}
+
+	swiper.zuopin_read_swiper {
+		height: 500rpx;
+	}
+
+	.ceshi_swiper image {
+		width: 599rpx;
+		height: 323rpx;
+	}
+
+	.ceshi_swiper2 image {
+		width: 626rpx;
+		height: 337rpx;
+	}
+
+	swiper.ceshi_swiper_s {
+		height: 337rpx;
+	}
+
+	swiper.read_swiper {
+		height: 323rpx;
+	}
 </style>

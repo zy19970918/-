@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="auth">
-			<image src="http://img03.sogoucdn.com/v2/thumb/resize/w/100/h/100?appid=100520147&url=http%3A%2F%2Fdl.app.sogou.com%2Fpc_logo%2F4669602030091557924.png"
+			<image src="https://img03.sogoucdn.com/v2/thumb/resize/w/100/h/100?appid=100520147&url=http%3A%2F%2Fdl.app.sogou.com%2Fpc_logo%2F4669602030091557924.png"
 			 class="img" mode="aspectFill"></image>
 			<!-- 		<view class="title">微信授权页面</view> -->
 			<view class="describe">点击下方按钮进行手机号码授权</view>
@@ -41,6 +41,7 @@
 			wxadd(pho) {
 				var that=this
 				uni.setStorageSync('flag',true)
+				const scene = uni.getStorageSync('scene')
 				const sessionKey = uni.getStorageSync('session_key')
 				const nickName = uni.getStorageSync('userInfo').nickName
 				const picture = uni.getStorageSync('userInfo').avatarUrl
@@ -49,7 +50,7 @@
 				const wxCity = uni.getStorageSync('userInfo').city
 				const wxOpenId = uni.getStorageSync('openid')
 				uni.request({
-					url: "http://www.35logo.cn:8886/user/save",
+					url: "https://www.xn--4gqr6isbv1bn21d.com/api/user/save",
 					method: 'POST',
 					header: {
 						"Content-Type": "application/json"
@@ -65,6 +66,7 @@
 						sessionKey:sessionKey,
 						iv:that.iv,
 						encryptedData:that.encryptedData,
+						userId:scene
 					},
 					success(res) {
 						console.log(res)
