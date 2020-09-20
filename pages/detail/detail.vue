@@ -10,15 +10,17 @@
 			{{company.province==company.city?'':company.province}}{{company.city}}{{company.detailAddr}}
 		</view>
 		<view class="phone">
-			{{phone?phone:"**********"}}
+		<text style="display: flex;justify-content: flex-end; flex-direction: column; min-width: 200rpx; ">{{phone?phone:"**********"}}</text>
+		<view type="primary" size="mini" style="background-color: #007AFF; min-width: 100rpx; text-align: center;border-radius: 20rpx; padding: 10rpx;" @click="looks">复制号码</view>
+		<view type="primary" size="mini" style="margin-left: 30rpx; background-color: #4CD964; width: 100rpx; text-align: center;border-radius: 20rpx;padding: 10rpx;" @click="look">查看</view>
 		</view>
 		<view class="wxchat">
-			{{company.wxNumber}}
+			<text style="display: flex;justify-content: flex-end; flex-direction: column; min-width: 200rpx;">{{company.wxNumber}}</text>
+			<view type="primary" size="mini" style="background-color: #007AFF; min-width: 100rpx; text-align: center;border-radius: 20rpx; padding: 10rpx;" @click="lookss">复制微信</view>
 		</view>
 		<view class="job">
 			{{company.serviceScope}}
 		</view>
-			<button type="primary" size="mini" style="display: inline-block; position: fixed;top:50.1%; right: 20%;" @click="look">查看</button>
 	</view>
 </template>
 
@@ -47,6 +49,23 @@
 						this.flag = true
 						return false
 					}
+				})
+			},
+			looks() {
+				if(this.phone) {
+					wx.setClipboardData({
+						data:this.phone
+					})
+				}else {
+					uni.showToast({
+						title:"请先查看号码",
+						icon:'none'
+					})
+				}
+			},
+			lookss() {
+				wx.setClipboardData({
+					 data:this.company.wxNumber
 				})
 			},
 			look() {
@@ -140,19 +159,23 @@
 	.wxchat{
 		position:fixed;
 		left:28%;
-		top: 60.5%;
+		top: 58.5%;
 		text-align: left;
 		box-sizing: border-box;
-		width: 400rpx;
+		display: flex;
+		justify-content: space-between;
+		// width: 400rpx;
 		white-space: nowrap;
 	}
 	.phone{
 		position: fixed;
-		top: 50.1%;
+		top: 48.2%;
 		left:28%;
+		display: flex;
+		justify-content: space-between;
 		text-align: left;
 		box-sizing: border-box;
-		width: 320rpx;
+		// width: 320rpx;
 		white-space: nowrap;
 	}
 	.addr {

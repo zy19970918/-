@@ -66,19 +66,29 @@ page {
 .wxchat.data-v-3e159eb4 {
   position: fixed;
   left: 28%;
-  top: 60.5%;
+  top: 58.5%;
   text-align: left;
   box-sizing: border-box;
-  width: 400rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
   white-space: nowrap;
 }
 .phone.data-v-3e159eb4 {
   position: fixed;
-  top: 50.1%;
+  top: 48.2%;
   left: 28%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
   text-align: left;
   box-sizing: border-box;
-  width: 320rpx;
   white-space: nowrap;
 }
 .addr.data-v-3e159eb4 {

@@ -3,8 +3,8 @@
 		<view class="top_bar">
 			<view class="mine">
 				<view class="mine_left">
-					<image style="width: 120rpx; height: 120rpx; border-radius: 50%;" :src="touxiang" mode="aspectFit"></image>
-					<text style="margin-left: 25rpx; color: #FFFFFF;">{{name}}</text>
+					<image style="width: 120rpx; height: 120rpx; border-radius: 50%;" :src="touxiang.avatarUrl" mode="aspectFit"></image>
+					<text style="margin-left: 25rpx; color: #FFFFFF;">{{touxiang.nickName}}</text>
 				</view>
 				<view class="" style="position: absolute;top: 7rpx; right: 0; color: #FFFFFF; font-size: 26rpx;" @click="toWith">
 					提现记录<text>＞</text>
@@ -78,13 +78,13 @@
 				imagePath: [],
 				pathList: [],
 				urlList: [{
-						url: 'http://m.qpic.cn/psc?/V11EtE3S2awPyr/bqQfVz5yrrGYSXMvKr.cqb8oOh*SrI65s1IZ0OgwZinhoCEBJqB1*B0kZiop6dvwGCOlw72ss1a1nbF4R1EVMh.PETQM48yqodqrm*kOwb8!/b&bo=7gI2Be4CNgUDByI!&rf=viewer_4',
+						url: 'https://m.qpic.cn/psc?/V11EtE3S2awPyr/bqQfVz5yrrGYSXMvKr.cqb8oOh*SrI65s1IZ0OgwZinhoCEBJqB1*B0kZiop6dvwGCOlw72ss1a1nbF4R1EVMh.PETQM48yqodqrm*kOwb8!/b&bo=7gI2Be4CNgUDByI!&rf=viewer_4',
 					},
 					{
-						url: 'http://m.qpic.cn/psc?/V11EtE3S2awPyr/bqQfVz5yrrGYSXMvKr.cqdty8A0OzEsXgGIhPcK*Aw07T.EyHpJlocBFkJcg6ukfODPsUSVzYv0rUWyBvjzHI0yeufsMhDi9uO2hKe.*Dd0!/b&bo=7gI2BQAAAAADB*0!&rf=viewer_4',
+						url: 'https://m.qpic.cn/psc?/V11EtE3S2awPyr/bqQfVz5yrrGYSXMvKr.cqdty8A0OzEsXgGIhPcK*Aw07T.EyHpJlocBFkJcg6ukfODPsUSVzYv0rUWyBvjzHI0yeufsMhDi9uO2hKe.*Dd0!/b&bo=7gI2BQAAAAADB*0!&rf=viewer_4',
 					},
 					{
-						url: 'http://m.qpic.cn/psc?/V11EtE3S2awPyr/bqQfVz5yrrGYSXMvKr.cqeUanfR1uiFvogoU1uqIqfmo9oemrxdcIcs4mkq82ufSBslERrRtA3yoINDnfi98Gp1paNEXD9mia5e.wp8g9fg!/b&bo=7gI2BQAAAAADB*0!&rf=viewer_4'
+						url: 'https://m.qpic.cn/psc?/V11EtE3S2awPyr/bqQfVz5yrrGYSXMvKr.cqeUanfR1uiFvogoU1uqIqfmo9oemrxdcIcs4mkq82ufSBslERrRtA3yoINDnfi98Gp1paNEXD9mia5e.wp8g9fg!/b&bo=7gI2BQAAAAADB*0!&rf=viewer_4'
 					}
 				],
 				erweima: "",
@@ -99,21 +99,23 @@
 			this.getmoney()
 			this.eq()
 			var that = this;
-			wx.getUserInfo({
-				success: res => {
-					that.name = res.userInfo.nickName,
-						wx.downloadFile({
-							url: res.userInfo.avatarUrl, //仅为示例，并非真实的资源
-							success: function(res) {
-								// 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
-								if (res.statusCode === 200) {
-									console.log(res, "reererererer")
-									that.touxiang = res.tempFilePath
-								}
-							}
-						})
-				}
-			})
+			const av= uni.getStorageSync('userInfo')
+			that.touxiang=av
+			// wx.getUserInfo({
+			// 	success: res => {
+			// 		that.name = res.userInfo.nickName,
+			// 			wx.downloadFile({
+			// 				url: res.userInfo.avatarUrl, //仅为示例，并非真实的资源
+			// 				success: function(res) {
+			// 					// 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
+			// 					if (res.statusCode === 200) {
+			// 						console.log(res, "reererererer")
+			// 						that.touxiang = res.tempFilePath
+			// 					}
+			// 				}
+			// 			})
+			// 	}
+			// })
 		},
 		onShow() {
 			this.getmoney()

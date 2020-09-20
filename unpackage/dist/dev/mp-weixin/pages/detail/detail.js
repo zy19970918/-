@@ -185,6 +185,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 var _default =
 {
   data: function data() {
@@ -211,6 +213,23 @@ var _default =
           return false;
         }
       });
+    },
+    looks: function looks() {
+      if (this.phone) {
+        wx.setClipboardData({
+          data: this.phone });
+
+      } else {
+        uni.showToast({
+          title: "请先查看号码",
+          icon: 'none' });
+
+      }
+    },
+    lookss: function lookss() {
+      wx.setClipboardData({
+        data: this.company.wxNumber });
+
     },
     look: function look() {var _this2 = this;
       var userid = uni.getStorageSync('userId');
