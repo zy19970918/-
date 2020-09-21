@@ -1,6 +1,6 @@
 <template>
 	<view class="">
-		<video :src="video" style="width: 100%; height: 435rpx;" poster="https://pic.raolibao.com/881/block/881_global_banner02/b144467428121cac9109b1bc560c8192c0100475.jpg?x-oss-process=image/resize,m_fill,limit_0,w_1188,h_488"
+		<video :src="video" style="width: 100%; height: 435rpx;" poster="http://m.qpic.cn/psc?/V11EtE3S2awPyr/bqQfVz5yrrGYSXMvKr.cqY19dadW6L0nfwBG0UPSIeyYqiywE68MpAK7JKHGBqFKeiFsM276jzUyfcLCJwmV9CbAoY4J6K4TgBNm8o8i8r4!/b&bo=xAg4BAAAAAABB9A!&rf=viewer_4"
 		 autoplay controls show-progress object-fit="fill"></video>
 		<view class="text_bar">
 			<view class="imag_logo">
@@ -24,13 +24,13 @@
 				<view class="th" style="width: 24%;">地址</view>
 				<view class="th" style="width: 27%;">操作</view>
 			</view>
-			<scroll-view scroll-y="true" style="height: 380rpx;">
+			<scroll-view scroll-y="true" style="max-height: 380rpx;">
 				<view>
 					<view class="table" v-if="list.length!==0">
 						<block v-for="(item,index) in list" :key="index">
 							<view class="tr bg-g" style="margin-top: 8rpx;">
 								<view class="td" style="width: 16%;">
-									<image style="width:66rpx; height:66rpx;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" :src="item.isUser==0?'http://www.35logo.cn:8080'+item.wxQcode:item.wxPicture"
+									<image style="width:66rpx; height:66rpx;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" :src="item.isUser==0?'https://www.xn--4gqr6isbv1bn21d.com'+item.wxQcode:item.wxPicture"
 									 mode="aspectFit"></image>
 								</view>
 								<view class="td" style="width: 20%; font-size: 26rpx; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{item.companyName}}</view>
@@ -51,7 +51,7 @@
 						</block>
 					</view>
 					<view class="" style="height: 100%; width: 100%;" v-else>
-						<image src="../../static/imgs/wx_20200916170446.png" @click="eq()" style="height: 380rpx; width: 100%;" mode="scaleToFill"></image>
+						<image src="../../static/imgs/aef99683afe6442f275fc9aee200d8b.png" @click="eq()" style="height: 380rpx; width: 100%;" mode="scaleToFill"></image>
 					</view>
 				</view>
 			</scroll-view>
@@ -123,11 +123,9 @@
 				console.log('modal关闭')
 			},
 			pay() {
-				console.log('11111')
 				var that = this
 				var userid = uni.getStorageSync('userId')
 				var openid = uni.getStorageSync('openid')
-				console.log(that.money.standMoney)
 				uni.request({
 					header: {
 						'content-type': 'application/x-www-form-urlencoded'
@@ -140,7 +138,6 @@
 						openid: openid
 					},
 					success(res) {
-						console.log('dhuwhdiwdyw89')
 						wx.requestPayment({
 							timeStamp: res.data.data.timeStamp,
 							nonceStr: res.data.data.nonceStr,
@@ -221,8 +218,6 @@
 				this.$http.postRequest('/user/queryCountAndTime', {
 					userId: userid.userId
 				}).then(res => {
-					console.log(res)
-
 					var time1 = new Date(`${res.msg.payTimeStr}`);
 					var time2 = new Date();
 					if (!res.msg.payTimeStr && !res.msg.browseCount) {
@@ -235,10 +230,7 @@
 					} else {
 						this.cont = true
 					}
-					console.log(time1.getTime())
-					console.log(time2.getTime())
 					if (time1.getTime() <= time2.getTime()) {
-						console.log("执行")
 						uni.showToast({
 							title: "会员已到期",
 							icon: 'none'
@@ -269,8 +261,8 @@
 								that.ADD()
 							} else {
 								uni.showToast({
-									title:"参数错误",
-									icon:"none"
+									title: "取消支付",
+									icon: "none"
 								})
 							}
 						}
@@ -307,14 +299,14 @@
 				}
 			},
 			getIndeinfo() {
-				this.list = []
+				// this.list = []
 				var companyId = uni.getStorageSync('companyId')
 				var userid = uni.getStorageSync('userId')
 				this.$http.postRequest('/company/query', {
 					userId: userid.userId,
 					companyId: companyId
 				}).then(res => {
-					this.list = res
+					// this.list = res
 				})
 				this.$http.postRequest('/notice/query').then(res => {
 					this.noticeContent = res.noticeContent
@@ -340,8 +332,8 @@
 								that.ADD()
 							} else {
 								uni.showToast({
-									title:"参数错误",
-									icon:"none"
+									title: "取消支付",
+									icon: "none"
 								})
 							}
 						}
@@ -384,8 +376,8 @@
 			uniNoticeBar
 		},
 		onLoad(options) {
-			if(options.scene) {
-				uni.setStorageSync('scene',options.scene)
+			if (options.scene) {
+				uni.setStorageSync('scene', options.scene)
 			}
 			this.getmoney()
 			this.getuserInfo()

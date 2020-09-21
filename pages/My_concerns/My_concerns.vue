@@ -10,7 +10,7 @@
 		  </view>
 		  <block v-for="(item,index) in list" :key="index">
 		    <view class="tr bg-g" style="margin-top: 8rpx;" >
-		      <view class="td" style="width: 16%;"><image style="width:66rpx; height:66rpx;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" :src="item.isUser==0?'http://www.35logo.cn:8080'+item.wxQcode:item.wxPicture"
+		      <view class="td" style="width: 16%;"><image style="width:66rpx; height:66rpx;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" :src="item.isUser==0?'https://www.xn--4gqr6isbv1bn21d.com'+item.wxQcode:item.wxPicture"
 					 mode="aspectFit"></image></view>
 		      <view class="td" style="width: 20%; font-size: 26rpx;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{item.companyName}}</view>
 		      <view class="td" style="width: 13%; font-size: 26rpx; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{item.name}}</view>

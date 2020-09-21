@@ -5,7 +5,7 @@
 				<view class="" style="font-size: 36rpx; color: #FFFFFF; margin-top: 21rpx;">
 					返现总额
 				</view>
-				<view class="" style="font-size: 32rpx; color: #FFFFFF; margin-top: 21rpx;">
+				<view class="" style="font-size: 32rpx; color: #FFFFFF; margin-top: 21rpx; text-align: center;">
 					￥<text>{{list[0].historyMoney?list[0].historyMoney:0}}</text>
 				</view>
 			</view>
@@ -30,9 +30,9 @@
 		</view>
 		<view class="list" style="padding-left: 80rpx;" v-for="(item,index) in list" :key='index'>
 			<view class="">
-				<view class="round" style="display: inline-block;"></view>
+				<view class="round" style="display: inline-block;"><image :src="item.wxPicture" style="height: 100%; width: 100%; border-radius: 50%;" mode=""></image></view>
 			</view>
-			<view class="" style="margin-right: 218rpx;">
+			<view class="" style="margin-right: 218rpx; margin-left: 20rpx;">
 				<view class="" style="font-size: 32rpx; color: #333333; font-weight: 600;">
 					{{item.wxNickname}}
 				</view>
@@ -59,7 +59,6 @@
 		},
 		methods: {
 			gettuiguan() {
-				console.log("ssss")
 				var userid=uni.getStorageSync('userId')
 				this.$http.postRequest('/user/extension',{userId:userid.userId}).then(res=>{this.list=res;console.log(res)})
 			},

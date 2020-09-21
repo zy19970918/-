@@ -64,7 +64,6 @@
 				var userid=uni.getStorageSync('userId')
 				this.$http.postRequest('/user/queryBankData',{bankName:that.bankName,bankNum:that.bankNum,wxNickname:that.name,userId:userid.userId}).then(res=>{
 					if(res.code==1) {
-						console.log(userid)
 						userid.isNew=0
 						uni.setStorageSync('userId',userid)
 						that.agreeContent=res.agreeContent;

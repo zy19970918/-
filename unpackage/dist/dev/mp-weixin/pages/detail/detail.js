@@ -187,6 +187,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -206,7 +209,6 @@ var _default =
       this.$http.postRequest('/company/query', {
         companyId: companyId }).
       then(function (res) {
-        console.log(res);
         _this.company = res[0];
         if (_this.company.isLook == 1) {
           _this.flag = true;
@@ -236,12 +238,9 @@ var _default =
       this.$http.postRequest('/user/queryCountAndTime', {
         userId: userid.userId }).
       then(function (res) {
-        console.log("成功1");
-        console.log(res);
         var time1 = new Date("".concat(res.msg.payTimeStr));
         var time2 = new Date();
         if (time1.getTime() <= time2.getTime()) {
-          console.log("daoqi");
           uni.showToast({
             title: "会员已到期",
             icon: 'none' });
@@ -261,7 +260,6 @@ var _default =
           companyId: _this2.companyId,
           userId: userid.userId }).
         then(function (res) {
-          console.log("成功2");
           console.log(res);
           _this2.phone = res.phone;
           _this2.flag = true;

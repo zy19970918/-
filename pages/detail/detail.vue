@@ -21,6 +21,9 @@
 		<view class="job">
 			{{company.serviceScope}}
 		</view>
+		<view class="" style="position:absolute;bottom: 15%; width: 100%; text-align: center; color: red;">
+			联系客服,获取更多查看次数
+		</view>
 	</view>
 </template>
 
@@ -43,7 +46,6 @@
 				this.$http.postRequest('/company/query', {
 					companyId: companyId
 				}).then(res => {
-					console.log(res)
 					this.company = res[0];
 					if (this.company.isLook == 1) {
 						this.flag = true
@@ -73,12 +75,9 @@
 				this.$http.postRequest('/user/queryCountAndTime', {
 					userId: userid.userId
 				}).then(res => {
-					console.log("成功1")
-					console.log(res)
 					var time1 = new Date(`${res.msg.payTimeStr}`);
 					var time2 = new Date();
 					if (time1.getTime() <= time2.getTime()) {
-						console.log("daoqi")
 						uni.showToast({
 							title: "会员已到期",
 							icon: 'none'
@@ -98,7 +97,6 @@
 						companyId: this.companyId,
 						userId: userid.userId
 					}).then(res => {
-						console.log("成功2")
 						console.log(res)
 						this.phone=res.phone
 						this.flag = true

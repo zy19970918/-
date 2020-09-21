@@ -183,37 +183,71 @@ var appId = 'wxd26f46560a42f999';var _default =
       var wxProvince = uni.getStorageSync('userInfo').province;
       var wxCity = uni.getStorageSync('userInfo').city;
       var wxOpenId = uni.getStorageSync('openid');
-      uni.request({
-        url: "https://www.xn--4gqr6isbv1bn21d.com/api/user/save",
-        method: 'POST',
-        header: {
-          "Content-Type": "application/json" },
+      if (scene) {
+        uni.request({
+          url: "https://www.xn--4gqr6isbv1bn21d.com/api/user/save",
+          method: 'POST',
+          header: {
+            "Content-Type": "application/json" },
 
-        data: {
-          wxNickname: nickName,
-          wxPicture: picture,
-          phone: pho,
-          wxProvince: wxProvince,
-          wxCity: wxCity,
-          openid: wxOpenId,
-          picture: picture,
-          sessionKey: sessionKey,
-          iv: that.iv,
-          encryptedData: that.encryptedData,
-          userId: scene },
+          data: {
+            wxNickname: nickName,
+            wxPicture: picture,
+            phone: pho,
+            wxProvince: wxProvince,
+            wxCity: wxCity,
+            openid: wxOpenId,
+            picture: picture,
+            sessionKey: sessionKey,
+            iv: that.iv,
+            encryptedData: that.encryptedData,
+            userId: scene,
+            scanCode: 1 },
 
-        success: function success(res) {
-          console.log(res);
-          console.log("成功");
-          if (res.data.status == 200) {
-            uni.setStorageSync('flag', true);
-            uni.setStorageSync('userId', res.data.data.user);
-          }
-          uni.reLaunch({
-            url: '../index/index' });
+          success: function success(res) {
+            console.log(res);
+            console.log("成功");
+            if (res.data.status == 200) {
+              uni.setStorageSync('flag', true);
+              uni.setStorageSync('userId', res.data.data.user);
+            }
+            uni.reLaunch({
+              url: '../index/index' });
 
-        } });
+          } });
 
+      } else {
+        uni.request({
+          url: "https://www.xn--4gqr6isbv1bn21d.com/api/user/save",
+          method: 'POST',
+          header: {
+            "Content-Type": "application/json" },
+
+          data: {
+            wxNickname: nickName,
+            wxPicture: picture,
+            phone: pho,
+            wxProvince: wxProvince,
+            wxCity: wxCity,
+            openid: wxOpenId,
+            picture: picture,
+            sessionKey: sessionKey,
+            iv: that.iv,
+            encryptedData: that.encryptedData },
+
+          success: function success(res) {
+            console.log(res);
+            console.log("成功");
+            if (res.data.status == 200) {
+              uni.setStorageSync('flag', true);
+              uni.setStorageSync('userId', res.data.data.user);
+            }
+            uni.reLaunch({
+              url: '../index/index' });
+
+          } });
+
+      }
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

@@ -198,10 +198,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base64src.js */ 29));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+
+
+
+var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base64src.js */ 29));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
 {
   data: function data() {
-    return _defineProperty({
+    return {
       maskHidden: false,
       name: "",
       bank: '', //提现银行卡的信息
@@ -210,21 +213,20 @@ var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base
       imagePath: [],
       pathList: [],
       urlList: [{
-        url: 'https://m.qpic.cn/psc?/V11EtE3S2awPyr/bqQfVz5yrrGYSXMvKr.cqb8oOh*SrI65s1IZ0OgwZinhoCEBJqB1*B0kZiop6dvwGCOlw72ss1a1nbF4R1EVMh.PETQM48yqodqrm*kOwb8!/b&bo=7gI2Be4CNgUDByI!&rf=viewer_4' },
+        url: 'https://m.qpic.cn/psc?/V11EtE3S2awPyr/bqQfVz5yrrGYSXMvKr.cqSlToEf30keChhquCmQdvjA.7OJSOwOuWZz.meSLzHYctojts.p79SC3IVGmVCY0PdvQnphSbXNN6*lACfN.4XI!/b&bo=7gI2BQAAAAABB*8!&rf=viewer_4' },
 
       {
-        url: 'https://m.qpic.cn/psc?/V11EtE3S2awPyr/bqQfVz5yrrGYSXMvKr.cqdty8A0OzEsXgGIhPcK*Aw07T.EyHpJlocBFkJcg6ukfODPsUSVzYv0rUWyBvjzHI0yeufsMhDi9uO2hKe.*Dd0!/b&bo=7gI2BQAAAAADB*0!&rf=viewer_4' },
+        url: 'https://m.qpic.cn/psc?/V11EtE3S2awPyr/TmEUgtj9EK6.7V8ajmQrEEt7gYRt3V8TAkIMGREaw8MF6OvaoMFc*3AAEdPqvAeOT4.u9vs9iqDmsMUZN4bdN0rUJfUD3WrLXidLQHnajEU!/b&bo=7gI2BQAAAAABJ98!&rf=viewer_4' },
 
       {
-        url: 'https://m.qpic.cn/psc?/V11EtE3S2awPyr/bqQfVz5yrrGYSXMvKr.cqeUanfR1uiFvogoU1uqIqfmo9oemrxdcIcs4mkq82ufSBslERrRtA3yoINDnfi98Gp1paNEXD9mia5e.wp8g9fg!/b&bo=7gI2BQAAAAADB*0!&rf=viewer_4' }],
+        url: 'https://m.qpic.cn/psc?/V11EtE3S2awPyr/TmEUgtj9EK6.7V8ajmQrEObAEwCuRMbvdI6Yv0YCn4OEa5JzjB9Gif7b6J24lUFtjYZSaxfbAtL5M8r*IsLo5j7crfxYzBGsjHf9e993h6k!/b&bo=7gI2BQAAAAABF.8!&rf=viewer_4' }],
 
 
       erweima: "",
-      count: 0,
       drawalMoney: '', //累计提现，
       counts: '', //可提现
-      miniMoney: '' }, "count",
-    0);
+      miniMoney: '', //标准
+      count: 0 };
 
   },
   onLoad: function onLoad() {
@@ -254,7 +256,6 @@ var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base
   },
   methods: {
     prevImg: function prevImg() {
-      console.log("加");
       if (this.count < 2) {
         ++this.count;
       }
@@ -271,8 +272,6 @@ var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base
         userId: userid.userId }).
       then(function (res) {
         var a = res.returnMoney;
-        console.log("天线");
-        console.log(res);
         that.drawalMoney = res.drawalMoney;
         that.counts = a.toString();
       });
@@ -280,7 +279,6 @@ var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base
     tixian: function tixian() {var _this = this;
       var that = this;
       var userid = uni.getStorageSync('userId');
-      console.log(userid);
       if (userid.isNew == 1) {
         uni.navigateTo({
           url: '../addBank/addBank' });
@@ -292,8 +290,6 @@ var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base
           userId: userid.userId }).
         then(function (res) {
           _this.bank = res;
-          console.log(res);
-          console.log("假假按揭啊");
           uni.navigateTo({
             url: "../tixian/tixian?name=".concat(res.wxNickname, "&bankNum=").concat(res.bankNum, "&bankName=").concat(res.bankName, "&money=").concat(that.counts) });
 
@@ -320,7 +316,6 @@ var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base
       });
     },
     eq: function eq() {
-      console.log("执行");
       var that = this;
       // wx.request({
       // 	url: "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxd26f46560a42f999&secret=cd1d26f1681f0206ef9f3e2c421b0976",
@@ -424,7 +419,7 @@ var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base
       // context.fillText(that.code, 185, 435);
       context.stroke();
       //绘制左下角文字背景图
-      context.drawImage(path4, 115, 420, 150, 150);
+      context.drawImage(path4, 115, 415, 150, 150);
       context.setFontSize(12);
       context.setFillStyle('#ffe200');
       context.setTextAlign('left');
@@ -508,7 +503,7 @@ var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base
       // context.fillText(that.code, 185, 435);
       context.stroke();
       //绘制左下角文字背景图
-      context.drawImage(path4, 115, 432, 150, 150);
+      context.drawImage(path4, 115, 415, 150, 150);
       context.setFontSize(12);
       context.setFillStyle('#ffe200');
       context.setTextAlign('left');
@@ -538,7 +533,6 @@ var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base
           canvasId: 'mycanvasa',
           success: function success(res) {
             var tempFilePath = res.tempFilePath;
-            console.log(tempFilePath);
             that.imagePath.push(tempFilePath);
             that.canvasHidden = true;
           },
@@ -593,7 +587,7 @@ var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base
       // context.fillText(that.code, 185, 435);
       context.stroke();
       //绘制左下角文字背景图
-      context.drawImage(path4, 115, 432, 150, 150);
+      context.drawImage(path4, 115, 415, 150, 150);
       context.setFontSize(12);
       context.setFillStyle('#ffe200');
       context.setTextAlign('left');
@@ -655,10 +649,8 @@ var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base
     baocun: function baocun() {
       var that = this;
       var imagepath = that.imagePath[that.count];
-      console.log('2222222222');
       wx.getSetting({
         success: function success(res) {
-          console.log("xixixixixixi");
           if (!res.authSetting['scope.writePhotosAlbum']) {
             wx.authorize({
               scope: 'scope.writePhotosAlbum',
@@ -672,7 +664,6 @@ var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base
                       confirmText: '好的',
                       confirmColor: '#333',
                       success: function success(res) {
-                        console.log(res);
                         if (res.confirm) {
                           console.log('用户点击确定');
                           /* 该隐藏的隐藏 */
@@ -685,8 +676,6 @@ var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base
 
                   },
                   fail: function fail(err) {
-                    console.log('2222222222');
-                    console.log(imagepath);
                     console.log(err);
                   } });
 
@@ -704,7 +693,6 @@ var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base
               } });
 
           } else {
-            console.log('22222222225555555555555555');
             wx.saveImageToPhotosAlbum({
               filePath: imagepath,
               success: function success(res) {
@@ -714,7 +702,6 @@ var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base
                   confirmText: '好的',
                   confirmColor: '#333',
                   success: function success(res) {
-                    console.log(res);
                     if (res.confirm) {
                       console.log('用户点击确定');
                       /* 该隐藏的隐藏 */
@@ -727,8 +714,6 @@ var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base
 
               },
               fail: function fail(err) {
-                console.log('2222222222');
-                console.log(imagepath);
                 console.log(err);
               } });
 

@@ -66,8 +66,6 @@
 			},
 			getmymation() {
 				var userid = uni.getStorageSync('userId')
-				console.log(userid)
-				console.log(userid)
 				this.$http.postRequest('/user/queryCountAndTime', {
 					userId: userid.userId
 				}).then(res => {
@@ -87,11 +85,13 @@
 			toti() {
 				var userid = uni.getStorageSync('userId')
 				if (userid.isNew == 1) {
+					console.log("1")
 					uni.navigateTo({
 						url: '../addBank/addBank'
 					})
 				}
 				if (userid.isNew == 0) {
+					console.log("2")
 					uni.navigateTo({
 						url: '../set/set'
 					})

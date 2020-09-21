@@ -268,11 +268,9 @@ __webpack_require__.r(__webpack_exports__);
       console.log('modal关闭');
     },
     pay: function pay() {
-      console.log('11111');
       var that = this;
       var userid = uni.getStorageSync('userId');
       var openid = uni.getStorageSync('openid');
-      console.log(that.money.standMoney);
       uni.request({
         header: {
           'content-type': 'application/x-www-form-urlencoded' },
@@ -285,7 +283,6 @@ __webpack_require__.r(__webpack_exports__);
           openid: openid },
 
         success: function success(res) {
-          console.log('dhuwhdiwdyw89');
           wx.requestPayment({
             timeStamp: res.data.data.timeStamp,
             nonceStr: res.data.data.nonceStr,
@@ -366,8 +363,6 @@ __webpack_require__.r(__webpack_exports__);
       this.$http.postRequest('/user/queryCountAndTime', {
         userId: userid.userId }).
       then(function (res) {
-        console.log(res);
-
         var time1 = new Date("".concat(res.msg.payTimeStr));
         var time2 = new Date();
         if (!res.msg.payTimeStr && !res.msg.browseCount) {
@@ -380,10 +375,7 @@ __webpack_require__.r(__webpack_exports__);
         } else {
           _this3.cont = true;
         }
-        console.log(time1.getTime());
-        console.log(time2.getTime());
         if (time1.getTime() <= time2.getTime()) {
-          console.log("执行");
           uni.showToast({
             title: "会员已到期",
             icon: 'none' });
@@ -414,7 +406,7 @@ __webpack_require__.r(__webpack_exports__);
               that.ADD();
             } else {
               uni.showToast({
-                title: "参数错误",
+                title: "取消支付",
                 icon: "none" });
 
             }
@@ -452,14 +444,14 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getIndeinfo: function getIndeinfo() {var _this4 = this;
-      this.list = [];
+      // this.list = []
       var companyId = uni.getStorageSync('companyId');
       var userid = uni.getStorageSync('userId');
       this.$http.postRequest('/company/query', {
         userId: userid.userId,
         companyId: companyId }).
       then(function (res) {
-        _this4.list = res;
+        // this.list = res
       });
       this.$http.postRequest('/notice/query').then(function (res) {
         _this4.noticeContent = res.noticeContent;
@@ -485,7 +477,7 @@ __webpack_require__.r(__webpack_exports__);
               that.ADD();
             } else {
               uni.showToast({
-                title: "参数错误",
+                title: "取消支付",
                 icon: "none" });
 
             }

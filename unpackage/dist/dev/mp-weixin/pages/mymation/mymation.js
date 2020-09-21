@@ -257,6 +257,13 @@ __webpack_require__.r(__webpack_exports__);
 
         return false;
       }
+      if (this.city.length == 0) {
+        uni.showToast({
+          title: "地址不能为空",
+          icon: 'none' });
+
+        return false;
+      }
       if (this.job.length > 4) {
         uni.showToast({
           title: "职位长度超出限制",
@@ -275,14 +282,12 @@ __webpack_require__.r(__webpack_exports__);
       /^13[0-9]{1}[0-9]{8}$|15[0-9]{1}[0-9]{8}$|18[0-9]{1}[0-9]{8}|17[0-9]{1}[0-9]{8}$|14[0-9]{1}[0-9]{8}/;
       var tel_reg = /^([0-9]{3,4}-)?[0-9]{7,8}$/;
       if (!phone_reg.test(this.phone) && !tel_reg.test(this.phone)) {
-
         uni.showToast({
           title: '手机号码格式不正确',
           icon: 'none' });
 
         return false;
       }
-
       if (this.wxchat.length == 0) {
         uni.showToast({
           title: "微信不能为空",
@@ -338,6 +343,11 @@ __webpack_require__.r(__webpack_exports__);
           title: "保存成功",
           success: function success() {
             that.flag = true;
+            setTimeout(function () {
+              uni.navigateBack({
+                delta: -1 });
+
+            }, 1000);
           } });
 
       }); //修改用户信息
@@ -367,7 +377,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     toPoster: function toPoster() {
-      if (this.name.length == 0 || this.phone.length == 0 || this.yewu.length == 0 ||
+      if (this.name.length == 0 || this.phone.length == 0 || this.city.length == 0 ||
       this.job.length == 0 || this.wxchat.length == 0) {
         uni.showToast({
           title: "请完善相关信息",

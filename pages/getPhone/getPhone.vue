@@ -49,37 +49,71 @@
 				const wxProvince = uni.getStorageSync('userInfo').province
 				const wxCity = uni.getStorageSync('userInfo').city
 				const wxOpenId = uni.getStorageSync('openid')
-				uni.request({
-					url: "https://www.xn--4gqr6isbv1bn21d.com/api/user/save",
-					method: 'POST',
-					header: {
-						"Content-Type": "application/json"
-					},
-					data: {
-						wxNickname: nickName,
-						wxPicture: picture,
-						phone: pho,
-						wxProvince: wxProvince,
-						wxCity: wxCity,
-						openid: wxOpenId,
-						picture: picture,
-						sessionKey:sessionKey,
-						iv:that.iv,
-						encryptedData:that.encryptedData,
-						userId:scene
-					},
-					success(res) {
-						console.log(res)
-						console.log("成功")
-						if(res.data.status==200) {
-							uni.setStorageSync('flag',true)
-							uni.setStorageSync('userId',res.data.data.user)
+				if(scene) {
+					uni.request({
+						url: "https://www.xn--4gqr6isbv1bn21d.com/api/user/save",
+						method: 'POST',
+						header: {
+							"Content-Type": "application/json"
+						},
+						data: {
+							wxNickname: nickName,
+							wxPicture: picture,
+							phone: pho,
+							wxProvince: wxProvince,
+							wxCity: wxCity,
+							openid: wxOpenId,
+							picture: picture,
+							sessionKey:sessionKey,
+							iv:that.iv,
+							encryptedData:that.encryptedData,
+							userId:scene,
+							scanCode:1
+						},
+						success(res) {
+							console.log(res)
+							console.log("成功")
+							if(res.data.status==200) {
+								uni.setStorageSync('flag',true)
+								uni.setStorageSync('userId',res.data.data.user)
+							}
+							uni.reLaunch({
+								url:'../index/index'
+							})
 						}
-						uni.reLaunch({
-							url:'../index/index'
-						})
-					}
-				})
+					})
+				} else {
+					uni.request({
+						url: "https://www.xn--4gqr6isbv1bn21d.com/api/user/save",
+						method: 'POST',
+						header: {
+							"Content-Type": "application/json"
+						},
+						data: {
+							wxNickname: nickName,
+							wxPicture: picture,
+							phone: pho,
+							wxProvince: wxProvince,
+							wxCity: wxCity,
+							openid: wxOpenId,
+							picture: picture,
+							sessionKey:sessionKey,
+							iv:that.iv,
+							encryptedData:that.encryptedData,
+						},
+						success(res) {
+							console.log(res)
+							console.log("成功")
+							if(res.data.status==200) {
+								uni.setStorageSync('flag',true)
+								uni.setStorageSync('userId',res.data.data.user)
+							}
+							uni.reLaunch({
+								url:'../index/index'
+							})
+						}
+					})
+				}
 			}
 		}
 	}

@@ -42,7 +42,6 @@
 <script>
 	import base64Src from '../../utils/base64src.js';
 	import util from '../../utils/utils.js';
-	console.log(util)
 	export default {
 		data() {
 			return {

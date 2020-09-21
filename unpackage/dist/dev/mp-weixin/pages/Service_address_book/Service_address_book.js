@@ -202,40 +202,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 {
   data: function data() {
     return {
@@ -315,7 +281,7 @@ __webpack_require__.r(__webpack_exports__);
             title: "未搜索到结果",
             icon: 'none',
             success: function success() {
-              that.getmation();
+              that.infoList = [];
             } });
 
         }
@@ -338,7 +304,7 @@ __webpack_require__.r(__webpack_exports__);
     getimg: function getimg() {var _this2 = this;
       this.$http.postRequest('/banner/query').then(function (res) {//跳转网页
         _this2.link = res.linkAddr;
-        _this2.bannerImg = 'http://118.178.89.161:8080' + res.bannerImg;
+        _this2.bannerImg = 'https://www.xn--4gqr6isbv1bn21d.com' + res.bannerImg;
       });
       this.$http.postRequest('/communicate/query').then(function (res) {//劳务交流二维码
         _this2.code = res.communicationQcode;

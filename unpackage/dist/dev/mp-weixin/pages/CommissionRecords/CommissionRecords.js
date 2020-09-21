@@ -193,7 +193,6 @@ var _default =
   },
   methods: {
     gettuiguan: function gettuiguan() {var _this = this;
-      console.log("ssss");
       var userid = uni.getStorageSync('userId');
       this.$http.postRequest('/user/extension', { userId: userid.userId }).then(function (res) {_this.list = res;console.log(res);});
     },

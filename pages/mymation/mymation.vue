@@ -65,7 +65,7 @@
 		</view>
 		<view class="contentbar">
 			<view class="">
-				业务范畴<input type="text" v-model="yewu" @focus="change" placeholder="请输入业务范畴(必填)" style="display: inline-block; float: right; height:70rpx; width: 70%; padding-top: 10rpx;"
+				业务范畴<input type="text" v-model="yewu" @focus="change" placeholder="请输入业务范畴(选填)" style="display: inline-block; float: right; height:70rpx; width: 70%; padding-top: 10rpx;"
 				 value="" />
 			</view>
 		</view>
@@ -98,7 +98,7 @@
 				flag: true,
 				proice: '', //省
 				citys: '', //市
-				companyId:''//
+				companyId: '' //
 
 			}
 		},
@@ -121,6 +121,13 @@
 					})
 					return false
 				}
+				if (this.city.length == 0) {
+					uni.showToast({
+						title: "地址不能为空",
+						icon: 'none'
+					})
+					return false
+				}
 				if (this.job.length > 4) {
 					uni.showToast({
 						title: "职位长度超出限制",
@@ -139,14 +146,12 @@
 					/^13[0-9]{1}[0-9]{8}$|15[0-9]{1}[0-9]{8}$|18[0-9]{1}[0-9]{8}|17[0-9]{1}[0-9]{8}$|14[0-9]{1}[0-9]{8}/;
 				var tel_reg = /^([0-9]{3,4}-)?[0-9]{7,8}$/;
 				if (!phone_reg.test(this.phone) && !tel_reg.test(this.phone)) {
-
 					uni.showToast({
 						title: '手机号码格式不正确',
 						icon: 'none'
 					})
 					return false;
 				}
-
 				if (this.wxchat.length == 0) {
 					uni.showToast({
 						title: "微信不能为空",
@@ -177,7 +182,7 @@
 					return false
 				}
 				var that = this
-				var companyId=uni.getStorageSync('companyId')
+				var companyId = uni.getStorageSync('companyId')
 				var userid = uni.getStorageSync('userId')
 				this.$http.postRequest('/company/add', {
 					userId: userid.userId,
@@ -197,26 +202,31 @@
 					// companyId:companyId,
 				}).then(res => {
 					console.log(res)
-					uni.setStorageSync('companyId',res.msg.companyId)
-						uni.showToast({
-							title: "保存成功",
-							success() {
-								that.flag = true
-							}
-						})
+					uni.setStorageSync('companyId', res.msg.companyId)
+					uni.showToast({
+						title: "保存成功",
+						success() {
+							that.flag = true
+							setTimeout(function() {
+								uni.navigateBack({
+									delta: -1
+								})
+							}, 1000)
+						}
+					})
 				}) //修改用户信息
 			},
 			getinfo() { //获取用户信息
-				var companyId=uni.getStorageSync('companyId')
+				var companyId = uni.getStorageSync('companyId')
 				var userid = uni.getStorageSync('userId')
 				this.$http.postRequest('/company/querymingpian', {
-					userId:userid.userId
+					userId: userid.userId
 				}).then(res => {
 					console.log(res)
 					if (!res) {
 						return
 					}
-					    this.name = res.name,
+					this.name = res.name,
 						this.job = res.jobName,
 						this.city = res.companyAddr,
 						this.detailadress = res.detailAddr,
@@ -227,11 +237,11 @@
 						this.gngzonghao = res.officialName,
 						this.yewu = res.serviceScope,
 						this.companyName = res.companyName
-						uni.setStorageSync('companyId',res.companyId)
+					uni.setStorageSync('companyId', res.companyId)
 				})
 			},
 			toPoster() {
-				if (this.name.length == 0 || this.phone.length == 0 || this.yewu.length == 0 ||
+				if (this.name.length == 0 || this.phone.length == 0 ||	this.city.length==0||
 					this.job.length == 0 || this.wxchat.length == 0) {
 					uni.showToast({
 						title: "请完善相关信息",

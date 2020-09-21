@@ -38,7 +38,7 @@
 				  </view>
 				  <block v-for="(item,index) in searchData" :key="index">
 				    <view class="tr bg-g" style="margin-top: 8rpx;" >
-				      <view class="td" style="width: 16%;"><image style="width:66rpx; height:66rpx;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" :src="item.isUser==0?'http://www.35logo.cn:8080'+item.wxQcode:item.wxPicture"
+				      <view class="td" style="width: 16%;"><image style="width:66rpx; height:66rpx;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" :src="item.isUser==0?'https://www.xn--4gqr6isbv1bn21d.com'+item.wxQcode:item.wxPicture"
 							 mode="aspectFit"></image></view>
 				      <view class="td" style="width: 20%; font-size: 26rpx; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{item.companyName}}</view>
 				      <view class="td" style="width: 13%; font-size: 26rpx; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{item.name}}</view>
@@ -57,40 +57,6 @@
 				    </view>
 				  </block>
 				</view>
-<!-- 				<view class="">
-					<view class="" style="">
-						<view class="footer_bar" style="font-size: 32rpx;">
-							<image style="width: 46rpx; border: 1px solid #e0dfdf; height: 46rpx;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1618065806,14298536&fm=26&gp=0.jpg"
-							 mode="aspectFit"></image>
-							<text style="width: 100rpx;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; text-align: center; color: #BD8E57;">公司</text>
-							<text style="width: 90rpx;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; text-align: center;color: #BD8E57;">姓名</text>
-							<view class="" style="width: 180rpx;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;text-align: center;color: #BD8E57;">
-								地址
-							</view>
-							<view class="" style="width: 156rpx; text-align: center;color:#BD8E57;">			
-								操作
-							</view>
-						</view>
-					</view>
-				</view>
-				<view class="footer_bar" v-for="(item,index) in searchData" :key="index">
-					<image style="width: 46rpx; height: 46rpx;" :src="item.isUser==0?item.wxQcode:item.wxPicture"
-					 mode="aspectFit"></image>
-					<text style="width: 100rpx;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; text-align: center;">{{item.companyName}}</text>
-					<text style="width: 90rpx;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;text-align: center;">{{item.name}}</text>
-					<view class="" style="width: 180rpx;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;text-align: center;">
-						地址:<text>{{item.province}}{{item.city}}</text>
-					</view>
-					<view class="" style="display: flex; justify-content: space-between; align-items: center;" @click="guanzhu(item)">
-						<image style="width: 24rpx;height: 20rpx;" v-if="item.focusData==1" src="../../static/imgs/icon_yiguanzhu.png" mode="aspectFit"></image>
-						<image style="width: 24rpx;height: 20rpx;" v-if="item.focusData==0" src="../../static/imgs/icon_guanzhulaowu.png" mode="aspectFit"></image>
-						<text style="margin-left: 8rpx;">关注</text>
-					</view>
-					<view class="" style="display: flex; justify-content: space-between; align-items: center;">
-						<image src="../../static/imgs/icon_xiangqinglaowu.png" style="width: 22rpx; height: 21rpx;" mode="aspectFit"></image>
-						<text style="margin-left: 8rpx;" @click="todetail(item.companyId)">详情</text>
-					</view>
-				</view> -->
 				<simple-address ref="simpleAddress" :pickerValueDefault="cityPickerValueDefault" @onConfirm="onConfirm" themeColor="#007AFF"></simple-address>
 			</view>
 		</view>
@@ -179,7 +145,7 @@
 							title:"未搜索到结果",
 							icon:'none',
 							success() {
-								that.getmation()
+								that.infoList=[]
 							}
 						})
 					}
@@ -202,7 +168,7 @@
 			getimg() {
 				this.$http.postRequest('/banner/query').then(res=>{        //跳转网页
 					this.link=res.linkAddr
-					this.bannerImg='http://118.178.89.161:8080'+res.bannerImg
+					this.bannerImg='https://www.xn--4gqr6isbv1bn21d.com'+res.bannerImg
 				})
 				this.$http.postRequest('/communicate/query').then(res=>{   //劳务交流二维码
 					 this.code=res.communicationQcode
