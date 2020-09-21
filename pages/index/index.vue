@@ -51,7 +51,7 @@
 						</block>
 					</view>
 					<view class="" style="height: 100%; width: 100%;" v-else>
-						<image src="../../static/imgs/aef99683afe6442f275fc9aee200d8b.png" @click="eq()" style="height: 380rpx; width: 100%;" mode="scaleToFill"></image>
+						<image src="../../static/imgs/wx_20200921230303.png" @click="eq()" style="height: 596rpx; width: 710rpx;" mode="scaleToFill"></image>
 					</view>
 				</view>
 			</scroll-view>
