@@ -245,7 +245,7 @@ __webpack_require__.r(__webpack_exports__);
     ''), _defineProperty(_ref, "flagss",
     true), _defineProperty(_ref, "timer",
     null), _defineProperty(_ref, "cont",
-    true), _defineProperty(_ref, "money",
+    false), _defineProperty(_ref, "money",
     ''), _defineProperty(_ref, "data",
     [{
       name: '一手天下',
@@ -308,32 +308,55 @@ __webpack_require__.r(__webpack_exports__);
     },
     toDetail: function toDetail(item) {
       var that = this;
-      if (that.cont == false) {
-        uni.showModal({
-          title: "你还未加入我们，请先加入我们!",
-          content: "\u652F\u4ED8".concat(that.money.standMoney, "\u5143\uFF0C\u5F00\u901A").concat(that.money.months, "\u4E2A\u6708\u4F1A\u5458,\u53EF\u6D4F\u89C8").concat(that.money.browseCount, "\u6761\u4FE1\u606F!"),
-          cancelText: "暂不加入",
-          confirmText: "申请加入",
-          success: function success(res) {
-            if (res.confirm) {
-              that.ADD();
+      var flag = uni.getStorageSync('flag');
+      var userInfo = uni.getStorageSync('userInfo');
+      wx.getSetting({
+        success: function success(res) {
+          if (res.authSetting['scope.userInfo']) {
+            //已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+            if (!flag) {
+              uni.redirectTo({
+                url: '../login/login' });
+
             } else {
-              console.log("取消");
+              if (that.cont == false) {
+                uni.showModal({
+                  title: "你还未加入我们，请先加入我们!",
+                  content: "\u652F\u4ED8".concat(that.money.standMoney, "\u5143\uFF0C\u52A0\u5165\u6211\u4EEC!"),
+                  cancelText: "暂不加入",
+                  confirmText: "申请加入",
+                  success: function success(res) {
+                    if (res.confirm) {
+                      that.ADD();
+                    } else {
+                      console.log("取消");
+                    }
+                  } });
+
+                return false;
+              }
+              var companyId = uni.getStorageSync('companyId');
+              if (!companyId) {
+                uni.navigateTo({
+                  url: '../mymation/mymation' });
+
+
+                return false;
+              }
+              uni.navigateTo({
+                url: "../detail/detail?companyId=".concat(item) });
+
             }
-          } });
+          } else {
+            console.log("未授权");
+            // 未授权，跳转到授权页面							
+            wx.redirectTo({
+              url: "../login/login" });
 
-        return false;
-      }
-      var companyId = uni.getStorageSync('companyId');
-      if (!companyId) {
-        uni.navigateTo({
-          url: '../mymation/mymation' });
+          }
+        } });
 
 
-        return false;
-      }
-      uni.navigateTo({
-        url: "../detail/detail?companyId=".concat(item) });
 
     },
     getuserInfo: function getuserInfo() {//授权
@@ -393,35 +416,87 @@ __webpack_require__.r(__webpack_exports__);
       }); //获取我的剩余信息
     },
     eq: function eq() {
-      var companyId = uni.getStorageSync('companyId');
       var that = this;
-      if (that.cont == false) {
-        uni.showModal({
-          title: "你还未加入我们，请先加入我们!",
-          content: "\u652F\u4ED8".concat(that.money.standMoney, "\u5143\uFF0C\u5F00\u901A").concat(that.money.months, "\u4E2A\u6708\u4F1A\u5458,\u53EF\u6D4F\u89C8").concat(that.money.browseCount, "\u6761\u4FE1\u606F!"),
-          cancelText: "暂不加入",
-          confirmText: "申请加入",
-          success: function success(res) {
-            if (res.confirm) {
-              that.ADD();
+      var flag = uni.getStorageSync('flag');
+      var userInfo = uni.getStorageSync('userInfo');
+      wx.getSetting({
+        success: function success(res) {
+          if (res.authSetting['scope.userInfo']) {
+            //已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+            if (!flag) {
+              uni.redirectTo({
+                url: '../login/login' });
+
             } else {
-              uni.showToast({
-                title: "取消支付",
-                icon: "none" });
+              var companyId = uni.getStorageSync('companyId');
+              if (that.cont == false) {
+                uni.showModal({
+                  title: "你还未加入我们，请先加入我们!",
+                  content: "\u652F\u4ED8".concat(that.money.standMoney, "\u5143,\u52A0\u5165\u6211\u4EEC!"),
+                  cancelText: "暂不加入",
+                  confirmText: "申请加入",
+                  success: function success(res) {
+                    if (res.confirm) {
+                      that.ADD();
+                    } else {
+                      uni.showToast({
+                        title: "取消支付",
+                        icon: "none" });
 
+                    }
+                  } });
+
+                return false;
+              } else if (!companyId) {
+                uni.navigateTo({
+                  url: '../mymation/mymation' });
+
+              } else {
+                uni.navigateTo({
+                  url: "../Service_address_book/Service_address_book" });
+
+              }
             }
-          } });
+          } else {
+            console.log("未授权");
+            // 未授权，跳转到授权页面							
+            wx.redirectTo({
+              url: "../login/login" });
 
-        return false;
-      } else if (!companyId) {
-        uni.navigateTo({
-          url: '../mymation/mymation' });
+          }
+        } });
 
-      } else {
-        uni.navigateTo({
-          url: "../Service_address_book/Service_address_book" });
 
-      }
+      // var companyId = uni.getStorageSync('companyId')
+      // var that = this
+      // that.getuserInfo()
+      // if (that.cont == false) {
+      // 	uni.showModal({
+      // 		title: "你还未加入我们，请先加入我们!",
+      // 		content: `支付${that.money.standMoney}元，开通${that.money.months}个月会员,可浏览${that.money.browseCount}条信息!`,
+      // 		cancelText: "暂不加入",
+      // 		confirmText: "申请加入",
+      // 		success(res) {
+      // 			if (res.confirm) {
+      // 				that.ADD()
+      // 			} else {
+      // 				uni.showToast({
+      // 					title: "取消支付",
+      // 					icon: "none"
+      // 				})
+      // 			}
+      // 		}
+      // 	})
+      // 	return false
+      // } else if (!companyId) {
+      // 	uni.navigateTo({
+      // 		url: '../mymation/mymation'
+      // 	})
+      // } else {
+      // 	uni.navigateTo({
+      // 		url: "../Service_address_book/Service_address_book"
+      // 	})
+      // }
     },
     ADD: function ADD() {
       var that = this;
@@ -444,14 +519,14 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getIndeinfo: function getIndeinfo() {var _this4 = this;
-      // this.list = []
+      this.list = [];
       var companyId = uni.getStorageSync('companyId');
       var userid = uni.getStorageSync('userId');
       this.$http.postRequest('/company/query', {
         userId: userid.userId,
         companyId: companyId }).
       then(function (res) {
-        // this.list = res
+        _this4.list = res;
       });
       this.$http.postRequest('/notice/query').then(function (res) {
         _this4.noticeContent = res.noticeContent;
@@ -463,58 +538,81 @@ __webpack_require__.r(__webpack_exports__);
         _this4.video = res.view;
       }); //
     },
-    guanzhu: function guanzhu(item) {//关注
+    guanzhu: function guanzhu(item) {var _this5 = this; //关注
       var that = this;
-      var companyId = uni.getStorageSync('companyId');
-      if (that.cont == false) {
-        uni.showModal({
-          title: "你还未加入我们，请先加入我们!",
-          content: "\u652F\u4ED8".concat(that.money.standMoney, "\u5143\uFF0C\u5F00\u901A").concat(that.money.months, "\u4E2A\u6708\u4F1A\u5458,\u53EF\u6D4F\u89C8").concat(that.money.browseCount, "\u6761\u4FE1\u606F!"),
-          cancelText: "暂不加入",
-          confirmText: "申请加入",
-          success: function success(res) {
-            if (res.confirm) {
-              that.ADD();
+      var flag = uni.getStorageSync('flag');
+      var userInfo = uni.getStorageSync('userInfo');
+      wx.getSetting({
+        success: function success(res) {
+          if (res.authSetting['scope.userInfo']) {
+            //已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+            if (!flag) {
+              uni.redirectTo({
+                url: '../login/login' });
+
             } else {
-              uni.showToast({
-                title: "取消支付",
-                icon: "none" });
+              var companyId = uni.getStorageSync('companyId');
+              if (that.cont == false) {
+                uni.showModal({
+                  title: "你还未加入我们，请先加入我们!",
+                  content: "\u652F\u4ED8".concat(that.money.standMoney, "\u5143\uFF0C\u52A0\u5165\u6211\u4EEC!"),
+                  cancelText: "暂不加入",
+                  confirmText: "申请加入",
+                  success: function success(res) {
+                    if (res.confirm) {
+                      that.ADD();
+                    } else {
+                      uni.showToast({
+                        title: "取消支付",
+                        icon: "none" });
 
+                    }
+                  } });
+
+                return false;
+              }
+              if (!companyId) {
+                uni.navigateTo({
+                  url: '../mymation/mymation' });
+
+
+                return false;
+              }
+              var userid = uni.getStorageSync('userId');
+              _this5.$http.postRequest('/company/edit', {
+                companyId: item.companyId,
+                userId: userid.userId,
+                focusData: item.focusData }).
+              then(function (res) {
+                if (res.msg == 1) {
+                  uni.showToast({
+                    title: "关注成功",
+                    success: function success() {
+                      item.focusData = 1;
+                    } });
+
+                }
+                if (res.msg == 0) {
+                  uni.showToast({
+                    title: "取消关注",
+                    success: function success() {
+                      item.focusData = 0;
+                    } });
+
+                }
+              }); //
             }
-          } });
+          } else {
+            console.log("未授权");
+            // 未授权，跳转到授权页面							
+            wx.redirectTo({
+              url: "../login/login" });
 
-        return false;
-      }
-      if (!companyId) {
-        uni.navigateTo({
-          url: '../mymation/mymation' });
+          }
+        } });
 
 
-        return false;
-      }
-      var userid = uni.getStorageSync('userId');
-      this.$http.postRequest('/company/edit', {
-        companyId: item.companyId,
-        userId: userid.userId,
-        focusData: item.focusData }).
-      then(function (res) {
-        if (res.msg == 1) {
-          uni.showToast({
-            title: "关注成功",
-            success: function success() {
-              item.focusData = 1;
-            } });
 
-        }
-        if (res.msg == 0) {
-          uni.showToast({
-            title: "取消关注",
-            success: function success() {
-              item.focusData = 0;
-            } });
-
-        }
-      }); //
     } },
 
   components: {
@@ -525,19 +623,25 @@ __webpack_require__.r(__webpack_exports__);
       uni.setStorageSync('scene', options.scene);
     }
     this.getmoney();
-    this.getuserInfo();
+    // this.getuserInfo()
     this.getXieyi();
     this.getmymation();
+    this.getIndeinfo();
   },
   onShow: function onShow() {
-    this.getIndeinfo();
     this.getmymation();
   },
   onHide: function onHide() {
     if (this.cont == false) {
       setTimeout(function () {
         wx.switchTab({
-          url: "../index/index" });
+          url: "../index/index",
+          success: function success() {
+            uni.showToast({
+              title: "你还不是会员",
+              icon: 'none' });
+
+          } });
 
       }, 0);
       return false;

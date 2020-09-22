@@ -71,7 +71,7 @@
 		</view>
 		<view class="" style="display: flex;justify-content: space-around; width: 100%; margin-top: 50rpx;">
 			<button type="primary" :disabled="flag" size="mini" @click="baocun">保存信息</button>
-			<button type="warn" size="mini" @click="toPoster">生成招工海报</button>
+			<!-- <button type="warn" size="mini" @click="toPoster">生成招工海报</button> -->
 		</view>
 		<simple-address ref="simpleAddress" :pickerValueDefault="cityPickerValueDefault" @onConfirm="onConfirm" themeColor="#007AFF"></simple-address>
 	</view>

@@ -51,12 +51,12 @@
 						</block>
 					</view>
 					<view class="" style="height: 100%; width: 100%;" v-else>
-						<image src="../../static/imgs/wx_20200921230303.png" @click="eq()" style="height: 596rpx; width: 710rpx;" mode="scaleToFill"></image>
+						<image src="../../static/imgs/wx_20200922005300.jpg" @click="eq()" style="height: 603rpx; width: 710rpx;" mode="scaleToFill"></image>
 					</view>
 				</view>
 			</scroll-view>
 			<view class="" style="padding-top: 20rpx;">
-				<button @click="eq" style="">查看所有通讯录</button>
+				<button @click="eq" style="">进入圈子</button>
 			</view>
 		</view>
 		<e-modal :visible.sync="visible" @cancel="handleCancel">
@@ -100,7 +100,7 @@
 				time: '',
 				flagss: true,
 				timer: null,
-				cont: true,
+				cont: false,
 				money: '', //支付的ji金钱
 				data: [{
 					name: '一手天下',
@@ -163,33 +163,56 @@
 			},
 			toDetail(item) {
 				var that = this
-				if (that.cont == false) {
-					uni.showModal({
-						title: "你还未加入我们，请先加入我们!",
-						content: `支付${that.money.standMoney}元，开通${that.money.months}个月会员,可浏览${that.money.browseCount}条信息!`,
-						cancelText: "暂不加入",
-						confirmText: "申请加入",
-						success(res) {
-							if (res.confirm) {
-								that.ADD()
+				var flag = uni.getStorageSync('flag')
+				var userInfo = uni.getStorageSync('userInfo')
+				wx.getSetting({
+					success: res => {
+						if (res.authSetting['scope.userInfo']) {
+							//已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+							if (!flag) {
+								uni.redirectTo({
+									url: '../login/login'
+								})
 							} else {
-								console.log("取消")
-							}
-						}
-					})
-					return false
-				}
-				var companyId = uni.getStorageSync('companyId')
-				if (!companyId) {
-					uni.navigateTo({
-						url: '../mymation/mymation'
-					})
+								if (that.cont == false) {
+									uni.showModal({
+										title: "你还未加入我们，请先加入我们!",
+										content: `支付${that.money.standMoney}元，加入我们!`,
+										cancelText: "暂不加入",
+										confirmText: "申请加入",
+										success(res) {
+											if (res.confirm) {
+												that.ADD()
+											} else {
+												console.log("取消")
+											}
+										}
+									})
+									return false
+								}
+								var companyId = uni.getStorageSync('companyId')
+								if (!companyId) {
+									uni.navigateTo({
+										url: '../mymation/mymation'
+									})
 
-					return false
-				}
-				uni.navigateTo({
-					url: `../detail/detail?companyId=${item}`
+									return false
+								}
+								uni.navigateTo({
+									url: `../detail/detail?companyId=${item}`
+								})
+							}
+						} else {
+							console.log("未授权")
+							// 未授权，跳转到授权页面							
+							wx.redirectTo({
+								url: "../login/login"
+							})
+						}
+					}
 				})
+
+
 			},
 			getuserInfo() { //授权
 				var flag = uni.getStorageSync('flag')
@@ -248,35 +271,87 @@
 				}) //获取我的剩余信息
 			},
 			eq() {
-				var companyId = uni.getStorageSync('companyId')
 				var that = this
-				if (that.cont == false) {
-					uni.showModal({
-						title: "你还未加入我们，请先加入我们!",
-						content: `支付${that.money.standMoney}元，开通${that.money.months}个月会员,可浏览${that.money.browseCount}条信息!`,
-						cancelText: "暂不加入",
-						confirmText: "申请加入",
-						success(res) {
-							if (res.confirm) {
-								that.ADD()
-							} else {
-								uni.showToast({
-									title: "取消支付",
-									icon: "none"
+				var flag = uni.getStorageSync('flag')
+				var userInfo = uni.getStorageSync('userInfo')
+				wx.getSetting({
+					success: res => {
+						if (res.authSetting['scope.userInfo']) {
+							//已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+							if (!flag) {
+								uni.redirectTo({
+									url: '../login/login'
 								})
+							} else {
+								var companyId = uni.getStorageSync('companyId')
+								if (that.cont == false) {
+									uni.showModal({
+										title: "你还未加入我们，请先加入我们!",
+										content: `支付${that.money.standMoney}元,加入我们!`,
+										cancelText: "暂不加入",
+										confirmText: "申请加入",
+										success(res) {
+											if (res.confirm) {
+												that.ADD()
+											} else {
+												uni.showToast({
+													title: "取消支付",
+													icon: "none"
+												})
+											}
+										}
+									})
+									return false
+								} else if (!companyId) {
+									uni.navigateTo({
+										url: '../mymation/mymation'
+									})
+								} else {
+									uni.navigateTo({
+										url: "../Service_address_book/Service_address_book"
+									})
+								}
 							}
+						} else {
+							console.log("未授权")
+							// 未授权，跳转到授权页面							
+							wx.redirectTo({
+								url: "../login/login"
+							})
 						}
-					})
-					return false
-				} else if (!companyId) {
-					uni.navigateTo({
-						url: '../mymation/mymation'
-					})
-				} else {
-					uni.navigateTo({
-						url: "../Service_address_book/Service_address_book"
-					})
-				}
+					}
+				})
+
+				// var companyId = uni.getStorageSync('companyId')
+				// var that = this
+				// that.getuserInfo()
+				// if (that.cont == false) {
+				// 	uni.showModal({
+				// 		title: "你还未加入我们，请先加入我们!",
+				// 		content: `支付${that.money.standMoney}元，开通${that.money.months}个月会员,可浏览${that.money.browseCount}条信息!`,
+				// 		cancelText: "暂不加入",
+				// 		confirmText: "申请加入",
+				// 		success(res) {
+				// 			if (res.confirm) {
+				// 				that.ADD()
+				// 			} else {
+				// 				uni.showToast({
+				// 					title: "取消支付",
+				// 					icon: "none"
+				// 				})
+				// 			}
+				// 		}
+				// 	})
+				// 	return false
+				// } else if (!companyId) {
+				// 	uni.navigateTo({
+				// 		url: '../mymation/mymation'
+				// 	})
+				// } else {
+				// 	uni.navigateTo({
+				// 		url: "../Service_address_book/Service_address_book"
+				// 	})
+				// }
 			},
 			ADD() {
 				var that = this
@@ -299,14 +374,14 @@
 				}
 			},
 			getIndeinfo() {
-				// this.list = []
+				this.list = []
 				var companyId = uni.getStorageSync('companyId')
 				var userid = uni.getStorageSync('userId')
 				this.$http.postRequest('/company/query', {
 					userId: userid.userId,
 					companyId: companyId
 				}).then(res => {
-					// this.list = res
+					this.list = res
 				})
 				this.$http.postRequest('/notice/query').then(res => {
 					this.noticeContent = res.noticeContent
@@ -320,56 +395,79 @@
 			},
 			guanzhu(item) { //关注
 				var that = this
-				var companyId = uni.getStorageSync('companyId')
-				if (that.cont == false) {
-					uni.showModal({
-						title: "你还未加入我们，请先加入我们!",
-						content: `支付${that.money.standMoney}元，开通${that.money.months}个月会员,可浏览${that.money.browseCount}条信息!`,
-						cancelText: "暂不加入",
-						confirmText: "申请加入",
-						success(res) {
-							if (res.confirm) {
-								that.ADD()
-							} else {
-								uni.showToast({
-									title: "取消支付",
-									icon: "none"
+				var flag = uni.getStorageSync('flag')
+				var userInfo = uni.getStorageSync('userInfo')
+				wx.getSetting({
+					success: res => {
+						if (res.authSetting['scope.userInfo']) {
+							//已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+							if (!flag) {
+								uni.redirectTo({
+									url: '../login/login'
 								})
-							}
-						}
-					})
-					return false
-				}
-				if (!companyId) {
-					uni.navigateTo({
-						url: '../mymation/mymation'
-					})
+							} else {
+								var companyId = uni.getStorageSync('companyId')
+								if (that.cont == false) {
+									uni.showModal({
+										title: "你还未加入我们，请先加入我们!",
+										content: `支付${that.money.standMoney}元，加入我们!`,
+										cancelText: "暂不加入",
+										confirmText: "申请加入",
+										success(res) {
+											if (res.confirm) {
+												that.ADD()
+											} else {
+												uni.showToast({
+													title: "取消支付",
+													icon: "none"
+												})
+											}
+										}
+									})
+									return false
+								}
+								if (!companyId) {
+									uni.navigateTo({
+										url: '../mymation/mymation'
+									})
 
-					return false
-				}
-				var userid = uni.getStorageSync('userId')
-				this.$http.postRequest('/company/edit', {
-					companyId: item.companyId,
-					userId: userid.userId,
-					focusData: item.focusData
-				}).then(res => {
-					if (res.msg == 1) {
-						uni.showToast({
-							title: "关注成功",
-							success() {
-								item.focusData = 1
+									return false
+								}
+								var userid = uni.getStorageSync('userId')
+								this.$http.postRequest('/company/edit', {
+									companyId: item.companyId,
+									userId: userid.userId,
+									focusData: item.focusData
+								}).then(res => {
+									if (res.msg == 1) {
+										uni.showToast({
+											title: "关注成功",
+											success() {
+												item.focusData = 1
+											}
+										})
+									}
+									if (res.msg == 0) {
+										uni.showToast({
+											title: "取消关注",
+											success() {
+												item.focusData = 0
+											}
+										})
+									}
+								}) //
 							}
-						})
+						} else {
+							console.log("未授权")
+							// 未授权，跳转到授权页面							
+							wx.redirectTo({
+								url: "../login/login"
+							})
+						}
 					}
-					if (res.msg == 0) {
-						uni.showToast({
-							title: "取消关注",
-							success() {
-								item.focusData = 0
-							}
-						})
-					}
-				}) //
+				})
+
+
 			}
 		},
 		components: {
@@ -380,19 +478,25 @@
 				uni.setStorageSync('scene', options.scene)
 			}
 			this.getmoney()
-			this.getuserInfo()
+			// this.getuserInfo()
 			this.getXieyi()
 			this.getmymation()
+			this.getIndeinfo()
 		},
 		onShow() {
-			this.getIndeinfo()
 			this.getmymation()
 		},
 		onHide() {
 			if (this.cont == false) {
 				setTimeout(function() {
 					wx.switchTab({
-						url: "../index/index"
+						url: "../index/index",
+						success() {
+							uni.showToast({
+								title: "你还不是会员",
+								icon: 'none'
+							})
+						}
 					})
 				}, 0)
 				return false
