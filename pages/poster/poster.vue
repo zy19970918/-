@@ -1,6 +1,6 @@
 <template>
 	<view style="padding: 35rpx;">
-		<view class="label">
+	<!-- 	<view class="label">
 			<label>标题</label><input style="border: 2rpx solid rgb(17,150,219);" v-model="title" type="text" value="" />
 		</view>
 		<view class="">
@@ -11,7 +11,7 @@
 					<button type="primary" size="mini" form-type="submit">提交生成</button>
 			 	</view>
 			 </form>
-		</view>
+		</view> -->
 		<!-- 生成海报 -->
 		<view class='imagePathBox' :hidden="maskHidden == false">
 			<text style="color: #FFFFFF; font-size: 40rpx; float: right; margin-right: 20rpx; padding-top: 32rpx; margin-right: 30rpx;" @click="quxiao">X</text>

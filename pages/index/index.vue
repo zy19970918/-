@@ -16,6 +16,9 @@
 		<view class="footer" style="min-height: 500rpx; position: relative;">
 			<view class="imag_logo">
 				<image src="../../static/imgs/lauwtongxun.png" style="height: 33rpx; width: 144rpx;" mode="aspectFit"></image>
+				<!-- <view class="" style="">
+					<button @click="eq" style="height:43rpx; width:126rpx; text-align: center; line-height: 43rpx;background-color: none; background: none;border: 1px solid #be8e58; color: #666666; font-size: 20rpx; padding: 0;">进入圈子</button>
+				</view> -->
 			</view>
 			<view class="tr bg-w" style="margin-top: 10rpx;" v-if="list.length!==0">
 				<view class="th" style="width: 16%;">头像</view>
@@ -24,7 +27,7 @@
 				<view class="th" style="width: 24%;">地址</view>
 				<view class="th" style="width: 27%;">操作</view>
 			</view>
-			<scroll-view scroll-y="true" style="max-height: 380rpx;">
+			<scroll-view scroll-y="true" style="">
 				<view>
 					<view class="table" v-if="list.length!==0">
 						<block v-for="(item,index) in list" :key="index">
@@ -379,9 +382,8 @@
 				var userid = uni.getStorageSync('userId')
 				this.$http.postRequest('/company/query', {
 					userId: userid.userId,
-					companyId: companyId
 				}).then(res => {
-					this.list = res
+					console.log(res)
 				})
 				this.$http.postRequest('/notice/query').then(res => {
 					this.noticeContent = res.noticeContent
@@ -555,7 +557,10 @@
 
 	.imag_logo {
 		padding-left: 32rpx;
+		padding-right: 32rpx;
 		padding-top: 16rpx;
+		display: flex;
+		justify-content: space-between;
 	}
 
 	.scoll {

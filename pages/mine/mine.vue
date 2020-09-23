@@ -43,7 +43,7 @@
 			</view>
 			<view class="tooterbar" @click="tomydetail">
 				<image src="../../static/imgs/wx_20200902130731.png" style="height: 76rpx; width: 76rpx;" mode="aspectFit"></image>
-				<button type="default" style="max-height: 40rpx;">招工海报</button>
+				<button type="default" style="max-height: 40rpx;">个人信息</button>
 			</view>
 		</view>
 	</view>
@@ -82,7 +82,7 @@
 					url: '../mymation/mymation'
 				})
 			},
-			toti() {
+			toti() { 
 				var userid = uni.getStorageSync('userId')
 				if (userid.isNew == 1) {
 					console.log("1")

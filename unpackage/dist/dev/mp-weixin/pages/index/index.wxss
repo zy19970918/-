@@ -79,7 +79,14 @@
 }
 .imag_logo.data-v-57280228 {
   padding-left: 32rpx;
+  padding-right: 32rpx;
   padding-top: 16rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
 }
 .scoll.data-v-57280228 {
   margin: 12rpx 14rpx;

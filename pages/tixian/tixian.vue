@@ -70,7 +70,7 @@
 						'content-type': 'application/x-www-form-urlencoded'
 					},
 					method:'POST',
-					url:"https://www.xn--4gqr6isbv1bn21d.com/pay/payTakeMoney",
+					url:"https://www.xn--4gqr6isbv1bn21d.com/api/pay/payTakeMoney",
 					data:{
 						openid:openid,
 						userId:userid.userId,

@@ -226,6 +226,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 {
   data: function data() {var _ref;
     return _ref = {
@@ -523,10 +526,9 @@ __webpack_require__.r(__webpack_exports__);
       var companyId = uni.getStorageSync('companyId');
       var userid = uni.getStorageSync('userId');
       this.$http.postRequest('/company/query', {
-        userId: userid.userId,
-        companyId: companyId }).
+        userId: userid.userId }).
       then(function (res) {
-        _this4.list = res;
+        console.log(res);
       });
       this.$http.postRequest('/notice/query').then(function (res) {
         _this4.noticeContent = res.noticeContent;
