@@ -166,6 +166,21 @@ var _default =
   methods: {
     Withdrawal: function Withdrawal() {
       var that = this;
+      if (!that.bank.bankNum) {
+        uni.showModal({
+          title: "请先添加银行卡!",
+          confirmText: "添加",
+          showCancel: false,
+          success: function success(res) {
+            if (res.confirm) {
+              uni.navigateTo({
+                url: '../addBank/addBank' });
+
+            }
+          } });
+
+        return;
+      }
       if (that.money.length == 0) {
         uni.showToast({
           title: "请输入提现金额",
@@ -188,7 +203,7 @@ var _default =
 
         return false;
       }
-      if (parseInt(that.money) > parseInt(that.bank.money)) {
+      if (parseInt(that.money) > parseInt(that.bank.money) || parseInt(that.money) == 0) {
         uni.showToast({
           title: "不满足提现条件",
           icon: 'none' });
@@ -226,6 +241,7 @@ var _default =
     } },
 
   onLoad: function onLoad(options) {
+    console.log(options);
     this.bank = options;
     this.miniMoney = uni.getStorageSync('miniMoney');
   } };exports.default = _default;

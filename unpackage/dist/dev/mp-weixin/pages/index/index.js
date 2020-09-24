@@ -143,7 +143,17 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var uniNoticeBar = function uniNoticeBar() {__webpack_require__.e(/*! require.ensure | components/uni-notice-bar/uni-notice-bar */ "components/uni-notice-bar/uni-notice-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-notice-bar/uni-notice-bar.vue */ 143));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var mSearch = function mSearch() {__webpack_require__.e(/*! require.ensure | components/mehaotian-search-revision/mehaotian-search-revision */ "components/mehaotian-search-revision/mehaotian-search-revision").then((function () {return resolve(__webpack_require__(/*! @/components/mehaotian-search-revision/mehaotian-search-revision.vue */ 167));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniNoticeBar = function uniNoticeBar() {__webpack_require__.e(/*! require.ensure | components/uni-notice-bar/uni-notice-bar */ "components/uni-notice-bar/uni-notice-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-notice-bar/uni-notice-bar.vue */ 143));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -232,7 +242,6 @@ __webpack_require__.r(__webpack_exports__);
 {
   data: function data() {var _ref;
     return _ref = {
-      // video: 'https://cloud.video.taobao.com//play/u/740635139/p/1/e/6/t/1/264061731886.mp4', //首页视频，
       rollContent: "",
       flag: false,
       video: '',
@@ -270,6 +279,9 @@ __webpack_require__.r(__webpack_exports__);
     handleCancel: function handleCancel() {
       console.log('modal关闭');
     },
+    change: function change() {
+      this.eq();
+    },
     pay: function pay() {
       var that = this;
       var userid = uni.getStorageSync('userId');
@@ -278,7 +290,7 @@ __webpack_require__.r(__webpack_exports__);
         header: {
           'content-type': 'application/x-www-form-urlencoded' },
 
-        url: 'https://www.xn--4gqr6isbv1bn21d.com/api/pay/payMoney',
+        url: 'http://192.168.101.13:8080/pay/payMoney',
         method: 'POST',
         data: {
           userId: userid.userId,
@@ -286,6 +298,18 @@ __webpack_require__.r(__webpack_exports__);
           openid: openid },
 
         success: function success(res) {
+          console.log(res);
+          if (res.data.data.data == 0) {
+            uni.showToast({
+              title: "请先登录",
+              icon: 'none' });
+
+            setTimeout(function () {
+              uni.navigateTo({
+                url: '../login/login' });
+
+            }, 1000);
+          }
           wx.requestPayment({
             timeStamp: res.data.data.timeStamp,
             nonceStr: res.data.data.nonceStr,
@@ -324,7 +348,7 @@ __webpack_require__.r(__webpack_exports__);
             } else {
               if (that.cont == false) {
                 uni.showModal({
-                  title: "你还未加入我们，请先加入我们!",
+                  title: "加入我们后，可查看更多，并使用功能!",
                   content: "\u652F\u4ED8".concat(that.money.standMoney, "\u5143\uFF0C\u52A0\u5165\u6211\u4EEC!"),
                   cancelText: "暂不加入",
                   confirmText: "申请加入",
@@ -434,7 +458,7 @@ __webpack_require__.r(__webpack_exports__);
               var companyId = uni.getStorageSync('companyId');
               if (that.cont == false) {
                 uni.showModal({
-                  title: "你还未加入我们，请先加入我们!",
+                  title: "加入我们后，可查看更多，并使用功能!",
                   content: "\u652F\u4ED8".concat(that.money.standMoney, "\u5143,\u52A0\u5165\u6211\u4EEC!"),
                   cancelText: "暂不加入",
                   confirmText: "申请加入",
@@ -475,7 +499,7 @@ __webpack_require__.r(__webpack_exports__);
       // that.getuserInfo()
       // if (that.cont == false) {
       // 	uni.showModal({
-      // 		title: "你还未加入我们，请先加入我们!",
+      // 		title: "加入我们后，可查看更多，并使用功能!",
       // 		content: `支付${that.money.standMoney}元，开通${that.money.months}个月会员,可浏览${that.money.browseCount}条信息!`,
       // 		cancelText: "暂不加入",
       // 		confirmText: "申请加入",
@@ -522,13 +546,18 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getIndeinfo: function getIndeinfo() {var _this4 = this;
+      uni.showLoading({
+        title: "加载中" });
+
       this.list = [];
       var companyId = uni.getStorageSync('companyId');
       var userid = uni.getStorageSync('userId');
       this.$http.postRequest('/company/query', {
         userId: userid.userId }).
       then(function (res) {
-        console.log(res);
+        console.log(res[7]);
+        _this4.list = res.slice(0, 12);
+        uni.hideLoading();
       });
       this.$http.postRequest('/notice/query').then(function (res) {
         _this4.noticeContent = res.noticeContent;
@@ -556,7 +585,7 @@ __webpack_require__.r(__webpack_exports__);
               var companyId = uni.getStorageSync('companyId');
               if (that.cont == false) {
                 uni.showModal({
-                  title: "你还未加入我们，请先加入我们!",
+                  title: "加入我们后，可查看更多，并使用功能!",
                   content: "\u652F\u4ED8".concat(that.money.standMoney, "\u5143\uFF0C\u52A0\u5165\u6211\u4EEC!"),
                   cancelText: "暂不加入",
                   confirmText: "申请加入",
@@ -618,7 +647,8 @@ __webpack_require__.r(__webpack_exports__);
     } },
 
   components: {
-    uniNoticeBar: uniNoticeBar },
+    uniNoticeBar: uniNoticeBar,
+    mSearch: mSearch },
 
   onLoad: function onLoad(options) {
     if (options.scene) {
@@ -628,9 +658,10 @@ __webpack_require__.r(__webpack_exports__);
     // this.getuserInfo()
     this.getXieyi();
     this.getmymation();
-    this.getIndeinfo();
+    // this.getIndeinfo()
   },
   onShow: function onShow() {
+    this.getIndeinfo();
     this.getmymation();
   },
   onHide: function onHide() {

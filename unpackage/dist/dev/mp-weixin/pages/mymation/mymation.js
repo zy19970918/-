@@ -362,16 +362,18 @@ __webpack_require__.r(__webpack_exports__);
         if (!res) {
           return;
         }
-        _this.name = res.name,
-        _this.job = res.jobName,
-        _this.city = res.companyAddr,
-        _this.detailadress = res.detailAddr,
-        _this.phone = res.phone,
-        _this.mobilePhone = res.mobilePhone,
-        _this.wxchat = res.wxNumber,
-        _this.qq = res.qq,
-        _this.gngzonghao = res.officialName,
-        _this.yewu = res.serviceScope,
+        _this.name = res.name;
+        _this.job = res.jobName;
+        _this.city = res.companyAddr;
+        _this.citys = res.city;
+        _this.proice = res.province;
+        _this.detailadress = res.detailAddr;
+        _this.phone = res.phone;
+        _this.mobilePhone = res.mobilePhone;
+        _this.wxchat = res.wxNumber;
+        _this.qq = res.qq;
+        _this.gngzonghao = res.officialName;
+        _this.yewu = res.serviceScope;
         _this.companyName = res.companyName;
         uni.setStorageSync('companyId', res.companyId);
       });
@@ -394,6 +396,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$refs.simpleAddress.open();
     },
     onConfirm: function onConfirm(e) {
+      console.log(this.adress);
       console.log(e);
       if (e.labelArr[0] == e.labelArr[1]) {
         this.city = e.labelArr[1];

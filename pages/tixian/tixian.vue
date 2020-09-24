@@ -27,17 +27,32 @@
 		data() {
 			return {
 				bank: '', //提现银行卡信息
-				money:'',
-				miniMoney:'' //提现标准
+				money: '',
+				miniMoney: '' //提现标准
 			}
 		},
 		methods: {
 			Withdrawal() {
 				var that = this
-				if (that.money.length==0) {
+				if (!that.bank.bankNum) {
+					uni.showModal({
+						title: "请先添加银行卡!",
+						confirmText: "添加",
+						showCancel:false,
+						success(res) {
+							if (res.confirm) {
+								uni.navigateTo({
+									url: '../addBank/addBank'
+								})
+							}
+						}
+					})
+					return
+				}
+				if (that.money.length == 0) {
 					uni.showToast({
-						title:"请输入提现金额",
-						icon:'none'
+						title: "请输入提现金额",
+						icon: 'none'
 					})
 					return
 				}
@@ -45,18 +60,18 @@
 				if (!reg.test(that.money)) {
 					uni.showToast({
 						title: "请输入数字",
-						icon:'none'
+						icon: 'none'
 					})
 					return
 				}
-				if (that.bank.money<that.miniMoney) {
+				if (that.bank.money < that.miniMoney) {
 					uni.showToast({
 						title: "不满足提现条件",
 						icon: 'none'
 					})
 					return false
 				}
-				if (parseInt(that.money)>parseInt(that.bank.money)) {
+				if (parseInt(that.money) > parseInt(that.bank.money)||parseInt(that.money)==0) {
 					uni.showToast({
 						title: "不满足提现条件",
 						icon: 'none'
@@ -69,23 +84,23 @@
 					header: {
 						'content-type': 'application/x-www-form-urlencoded'
 					},
-					method:'POST',
-					url:"https://www.xn--4gqr6isbv1bn21d.com/api/pay/payTakeMoney",
-					data:{
-						openid:openid,
-						userId:userid.userId,
-						money:that.money
+					method: 'POST',
+					url: "https://www.xn--4gqr6isbv1bn21d.com/api/pay/payTakeMoney",
+					data: {
+						openid: openid,
+						userId: userid.userId,
+						money: that.money
 					},
 					success(res) {
-						if(res.data.status==200) {
+						if (res.data.status == 200) {
 							uni.showToast({
-								title:"提现成功",
+								title: "提现成功",
 								success() {
-									setTimeout(function () {
+									setTimeout(function() {
 										uni.navigateBack({
-											delta:1
+											delta: 1
 										})
-									},1000)
+									}, 1000)
 								}
 							})
 						}
@@ -94,8 +109,9 @@
 			}
 		},
 		onLoad(options) {
+			console.log(options)
 			this.bank = options
-			this.miniMoney=uni.getStorageSync('miniMoney')
+			this.miniMoney = uni.getStorageSync('miniMoney')
 		}
 	}
 </script>

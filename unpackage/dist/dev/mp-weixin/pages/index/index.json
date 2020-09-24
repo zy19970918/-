@@ -2,6 +2,7 @@
   "navigationBarTitleText": "劳务通讯录",
   "usingComponents": {
     "uni-notice-bar": "/components/uni-notice-bar/uni-notice-bar",
-    "e-modal": "/components/e-modal/e-modal"
+    "e-modal": "/components/e-modal/e-modal",
+    "m-search": "/components/mehaotian-search-revision/mehaotian-search-revision"
   }
 }

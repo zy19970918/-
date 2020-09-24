@@ -279,11 +279,6 @@ var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base
     tixian: function tixian() {var _this = this;
       var that = this;
       var userid = uni.getStorageSync('userId');
-      if (userid.isNew == 1) {
-        uni.navigateTo({
-          url: '../addBank/addBank' });
-
-      }
       if (userid.isNew == 0) {
         var userid = uni.getStorageSync('userId');
         this.$http.postRequest('/user/queryBank', {
@@ -294,6 +289,10 @@ var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base
             url: "../tixian/tixian?name=".concat(res.wxNickname, "&bankNum=").concat(res.bankNum, "&bankName=").concat(res.bankName, "&money=").concat(that.counts) });
 
         });
+      } else {
+        uni.navigateTo({
+          url: '../addBank/addBank' });
+
       }
     },
     change: function change(e) {
@@ -317,33 +316,6 @@ var _base64src = _interopRequireDefault(__webpack_require__(/*! ../../utils/base
     },
     eq: function eq() {
       var that = this;
-      // wx.request({
-      // 	url: "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxd26f46560a42f999&secret=cd1d26f1681f0206ef9f3e2c421b0976",
-      // 	method: 'GET',
-      // 	success(res) {
-      // 		console.log(res)
-      // 		console.log("token")
-      // 		wx.request({
-      // 			url: `https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=${res.data.access_token}`,
-      // 			method: 'POST',
-      // 			responseType:'arraybuffer',
-      // 			data: {
-      // 				scene: "code:1",
-      // 				is_hyaline: true
-      // 			},
-      // 			success(res) {
-      // 				console.log(res)
-      // 				const base64 = wx.arrayBufferToBase64(res.data).toString();
-      // 				that.erweima = "data:image/PNG;base64," + base64
-      // 				that.text(that.erweima)
-      // 			},
-      // 			fail(err) {
-      // 				console.log(err)
-      // 			}
-      // 		})
-      // 	}
-      // })/wechat/getAccessToken
-      // const wxOpenId = uni.getStorageSync('openid')
       var userid = uni.getStorageSync('userId');
       var obj = {};
       obj.userid = userid.userId;

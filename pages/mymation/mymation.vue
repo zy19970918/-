@@ -26,7 +26,7 @@
 		</view>
 		<view class="contentbar">
 			<view class="">
-				详细地址<input placeholder="请输入详细地址(选填)" type="text" v-model="detailadress" style="display: inline-block; float: right; height:70rpx; width: 70%;  padding-top: 10rpx;"
+				详细地址<input placeholder="请输入详细地址(选填)" @focus="change"  type="text" v-model="detailadress" style="display: inline-block; float: right; height:70rpx; width: 70%;  padding-top: 10rpx;"
 				 value="" />
 			</view>
 		</view>
@@ -226,16 +226,18 @@
 					if (!res) {
 						return
 					}
-					this.name = res.name,
-						this.job = res.jobName,
-						this.city = res.companyAddr,
-						this.detailadress = res.detailAddr,
-						this.phone = res.phone,
-						this.mobilePhone = res.mobilePhone,
-						this.wxchat = res.wxNumber,
-						this.qq = res.qq,
-						this.gngzonghao = res.officialName,
-						this.yewu = res.serviceScope,
+					    this.name = res.name
+						this.job = res.jobName
+						this.city = res.companyAddr
+						this.citys = res.city
+						this.proice= res.province
+						this.detailadress = res.detailAddr
+						this.phone = res.phone
+						this.mobilePhone = res.mobilePhone
+						this.wxchat = res.wxNumber
+						this.qq = res.qq
+						this.gngzonghao = res.officialName
+						this.yewu = res.serviceScope
 						this.companyName = res.companyName
 					uni.setStorageSync('companyId', res.companyId)
 				})
@@ -258,6 +260,7 @@
 				this.$refs.simpleAddress.open();
 			},
 			onConfirm(e) {
+				console.log(this.adress)
 				console.log(e)
 				if (e.labelArr[0] == e.labelArr[1]) {
 					this.city = e.labelArr[1]

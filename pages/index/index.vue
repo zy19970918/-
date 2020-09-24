@@ -1,6 +1,6 @@
 <template>
 	<view class="">
-		<video :src="video" style="width: 100%; height: 435rpx;" poster="http://m.qpic.cn/psc?/V11EtE3S2awPyr/bqQfVz5yrrGYSXMvKr.cqY19dadW6L0nfwBG0UPSIeyYqiywE68MpAK7JKHGBqFKeiFsM276jzUyfcLCJwmV9CbAoY4J6K4TgBNm8o8i8r4!/b&bo=xAg4BAAAAAABB9A!&rf=viewer_4"
+		<video :src="video" style="width: 100%;height:340rpx;" poster="http://m.qpic.cn/psc?/V11EtE3S2awPyr/bqQfVz5yrrGYSXMvKr.cqY19dadW6L0nfwBG0UPSIeyYqiywE68MpAK7JKHGBqFKeiFsM276jzUyfcLCJwmV9CbAoY4J6K4TgBNm8o8i8r4!/b&bo=xAg4BAAAAAABB9A!&rf=viewer_4"
 		 autoplay controls show-progress object-fit="fill"></video>
 		<view class="text_bar">
 			<view class="imag_logo">
@@ -13,23 +13,32 @@
 		<view class="scoll">
 			<uni-notice-bar showIcon="true" scrollable="true" single="true" :text="rollContent"></uni-notice-bar>
 		</view>
-		<view class="footer" style="min-height: 500rpx; position: relative;">
+		<view class="footer" style="min-height:560rpx; position: relative;">
 			<view class="imag_logo">
 				<image src="../../static/imgs/lauwtongxun.png" style="height: 33rpx; width: 144rpx;" mode="aspectFit"></image>
 				<!-- <view class="" style="">
 					<button @click="eq" style="height:43rpx; width:126rpx; text-align: center; line-height: 43rpx;background-color: none; background: none;border: 1px solid #be8e58; color: #666666; font-size: 20rpx; padding: 0;">进入圈子</button>
 				</view> -->
 			</view>
-			<view class="tr bg-w" style="margin-top: 10rpx;" v-if="list.length!==0">
+			<view class="" style="margin-top:15rpx;">
+				<mSearch style="display: inline-block;" @changes="change"></mSearch>
+				<view class="contry" style="display: inline-block;">
+					<view class="city" @click="eq"  style="display: inline-block; width: 100%; font-size: 30rpx; color: #333; text-align: center;">
+						{{city?city:'选择地区'}}
+					</view>
+					<!-- <text style="margin-left: 10rpx;">{{city}}</text> -->
+				</view>
+			</view>
+			<view class="tr bg-w" style="margin-top: 10rpx;">
 				<view class="th" style="width: 16%;">头像</view>
 				<view class="th" style="width: 20%;">公司</view>
 				<view class="th" style="width: 13%;">姓名</view>
 				<view class="th" style="width: 24%;">地址</view>
 				<view class="th" style="width: 27%;">操作</view>
 			</view>
-			<scroll-view scroll-y="true" style="">
+			<scroll-view scroll-y="true" style="max-height: 360rpx;">
 				<view>
-					<view class="table" v-if="list.length!==0">
+					<view class="table">
 						<block v-for="(item,index) in list" :key="index">
 							<view class="tr bg-g" style="margin-top: 8rpx;">
 								<view class="td" style="width: 16%;">
@@ -53,13 +62,13 @@
 							</view>
 						</block>
 					</view>
-					<view class="" style="height: 100%; width: 100%;" v-else>
+					<!-- <view class="" style="height: 100%; width: 100%;" v-else>
 						<image src="../../static/imgs/wx_20200922005300.jpg" @click="eq()" style="height: 603rpx; width: 710rpx;" mode="scaleToFill"></image>
-					</view>
+					</view> -->
 				</view>
 			</scroll-view>
-			<view class="" style="padding-top: 20rpx;">
-				<button @click="eq" style="">进入圈子</button>
+			<view class="" style="position: fixed; bottom: 0; width: 100%;">
+				<button @click="eq" style="background-color: red;">点击进入圈子</button>
 			</view>
 		</view>
 		<e-modal :visible.sync="visible" @cancel="handleCancel">
@@ -83,11 +92,11 @@
 </template>
 
 <script>
+	import mSearch from '@/components/mehaotian-search-revision/mehaotian-search-revision.vue';
 	import uniNoticeBar from '@/components/uni-notice-bar/uni-notice-bar.vue'
 	export default {
 		data() {
 			return {
-				// video: 'https://cloud.video.taobao.com//play/u/740635139/p/1/e/6/t/1/264061731886.mp4', //首页视频，
 				rollContent: "",
 				flag: false,
 				video: '',
@@ -125,6 +134,9 @@
 			handleCancel() {
 				console.log('modal关闭')
 			},
+			change() {
+				this.eq()
+			},
 			pay() {
 				var that = this
 				var userid = uni.getStorageSync('userId')
@@ -133,7 +145,7 @@
 					header: {
 						'content-type': 'application/x-www-form-urlencoded'
 					},
-					url: 'https://www.xn--4gqr6isbv1bn21d.com/api/pay/payMoney',
+					url: 'http://192.168.101.13:8080/pay/payMoney',
 					method: 'POST',
 					data: {
 						userId: userid.userId,
@@ -141,6 +153,18 @@
 						openid: openid
 					},
 					success(res) {
+						console.log(res)
+						if(res.data.data.data==0) {
+							uni.showToast({
+								title:"请先登录",
+								icon:'none'
+							})
+							setTimeout(function () {
+								uni.navigateTo({
+									url:'../login/login'
+								})
+							},1000)
+						}
 						wx.requestPayment({
 							timeStamp: res.data.data.timeStamp,
 							nonceStr: res.data.data.nonceStr,
@@ -179,7 +203,7 @@
 							} else {
 								if (that.cont == false) {
 									uni.showModal({
-										title: "你还未加入我们，请先加入我们!",
+										title: "加入我们后，可查看更多，并使用功能!",
 										content: `支付${that.money.standMoney}元，加入我们!`,
 										cancelText: "暂不加入",
 										confirmText: "申请加入",
@@ -289,7 +313,7 @@
 								var companyId = uni.getStorageSync('companyId')
 								if (that.cont == false) {
 									uni.showModal({
-										title: "你还未加入我们，请先加入我们!",
+										title: "加入我们后，可查看更多，并使用功能!",
 										content: `支付${that.money.standMoney}元,加入我们!`,
 										cancelText: "暂不加入",
 										confirmText: "申请加入",
@@ -330,7 +354,7 @@
 				// that.getuserInfo()
 				// if (that.cont == false) {
 				// 	uni.showModal({
-				// 		title: "你还未加入我们，请先加入我们!",
+				// 		title: "加入我们后，可查看更多，并使用功能!",
 				// 		content: `支付${that.money.standMoney}元，开通${that.money.months}个月会员,可浏览${that.money.browseCount}条信息!`,
 				// 		cancelText: "暂不加入",
 				// 		confirmText: "申请加入",
@@ -377,13 +401,18 @@
 				}
 			},
 			getIndeinfo() {
+				uni.showLoading({
+					title:"加载中"
+				})
 				this.list = []
 				var companyId = uni.getStorageSync('companyId')
 				var userid = uni.getStorageSync('userId')
 				this.$http.postRequest('/company/query', {
 					userId: userid.userId,
 				}).then(res => {
-					console.log(res)
+					console.log(res[7])
+					this.list=res.slice(0,12)
+					uni.hideLoading()
 				})
 				this.$http.postRequest('/notice/query').then(res => {
 					this.noticeContent = res.noticeContent
@@ -411,7 +440,7 @@
 								var companyId = uni.getStorageSync('companyId')
 								if (that.cont == false) {
 									uni.showModal({
-										title: "你还未加入我们，请先加入我们!",
+										title: "加入我们后，可查看更多，并使用功能!",
 										content: `支付${that.money.standMoney}元，加入我们!`,
 										cancelText: "暂不加入",
 										confirmText: "申请加入",
@@ -473,7 +502,8 @@
 			}
 		},
 		components: {
-			uniNoticeBar
+			uniNoticeBar,
+			mSearch
 		},
 		onLoad(options) {
 			if (options.scene) {
@@ -483,9 +513,10 @@
 			// this.getuserInfo()
 			this.getXieyi()
 			this.getmymation()
-			this.getIndeinfo()
+			// this.getIndeinfo()
 		},
 		onShow() {
+			this.getIndeinfo()
 			this.getmymation()
 		},
 		onHide() {
@@ -547,7 +578,7 @@
 
 		.text_jie {
 			text-indent: 2em;
-			font-size: 24rpx;
+			font-size: 28rpx;
 			color: #343434;
 			margin: 17rpx 35rpx;
 			margin-bottom: 8rpx;
@@ -596,5 +627,18 @@
 		border-radius: 27px;
 		background: rgba(190, 142, 88, 1);
 		color: #FFFFFF;
+	}
+	.contry {
+		margin-right: 20rpx;
+		width: 188rpx;
+		font-size: 20rpx;
+		padding-left: 15rpx;
+		padding-right: 15rpx;
+		height: 60rpx;
+		color: #3D3D3D;
+		border-radius: 8px;
+		float: right;
+		line-height: 60rpx;
+		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
 	}
 </style>
