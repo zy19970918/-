@@ -143,7 +143,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var mSearch = function mSearch() {__webpack_require__.e(/*! require.ensure | components/mehaotian-search-revision/mehaotian-search-revision */ "components/mehaotian-search-revision/mehaotian-search-revision").then((function () {return resolve(__webpack_require__(/*! @/components/mehaotian-search-revision/mehaotian-search-revision.vue */ 167));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniNoticeBar = function uniNoticeBar() {__webpack_require__.e(/*! require.ensure | components/uni-notice-bar/uni-notice-bar */ "components/uni-notice-bar/uni-notice-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-notice-bar/uni-notice-bar.vue */ 143));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var mSearch = function mSearch() {__webpack_require__.e(/*! require.ensure | components/mehaotian-search-revision/mehaotian-search-revision */ "components/mehaotian-search-revision/mehaotian-search-revision").then((function () {return resolve(__webpack_require__(/*! @/components/mehaotian-search-revision/mehaotian-search-revision.vue */ 157));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniNoticeBar = function uniNoticeBar() {__webpack_require__.e(/*! require.ensure | components/uni-notice-bar/uni-notice-bar */ "components/uni-notice-bar/uni-notice-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-notice-bar/uni-notice-bar.vue */ 143));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -290,7 +290,7 @@ __webpack_require__.r(__webpack_exports__);
         header: {
           'content-type': 'application/x-www-form-urlencoded' },
 
-        url: 'http://192.168.101.13:8080/pay/payMoney',
+        url: 'https://www.xn--4gqr6isbv1bn21d.com/api/pay/payMoney',
         method: 'POST',
         data: {
           userId: userid.userId,
@@ -410,37 +410,44 @@ __webpack_require__.r(__webpack_exports__);
     },
     getmymation: function getmymation(item) {var _this3 = this;
       var userid = uni.getStorageSync('userId');
-      this.$http.postRequest('/user/queryCountAndTime', {
-        userId: userid.userId }).
-      then(function (res) {
-        var time1 = new Date("".concat(res.msg.payTimeStr));
-        var time2 = new Date();
-        if (!res.msg.payTimeStr && !res.msg.browseCount) {
-          uni.showToast({
-            title: "你还不是会员",
-            icon: 'none' });
+      if (userid) {
+        this.$http.postRequest('/user/queryCountAndTime', {
+          userId: userid.userId }).
+        then(function (res) {
+          var time1 = new Date("".concat(res.msg.payTimeStr));
+          var time2 = new Date();
+          if (!res.msg.payTimeStr && !res.msg.browseCount) {
+            uni.showToast({
+              title: "你还不是会员",
+              icon: 'none' });
 
-          _this3.cont = false;
-          return false;
-        } else {
-          _this3.cont = true;
-        }
-        if (time1.getTime() <= time2.getTime()) {
-          uni.showToast({
-            title: "会员已到期",
-            icon: 'none' });
+            _this3.cont = false;
+            return false;
+          } else {
+            _this3.cont = true;
+          }
+          if (time1.getTime() <= time2.getTime()) {
+            uni.showToast({
+              title: "会员已到期",
+              icon: 'none' });
 
-          _this3.cont = false;
-          return false;
-        } else {
-          _this3.cont = true;
-        } //到期时间
-        if (item) {
-          uni.navigateTo({
-            url: '../mymation/mymation' });
+            _this3.cont = false;
+            return false;
+          } else {
+            _this3.cont = true;
+          } //到期时间
+          if (item) {
+            uni.navigateTo({
+              url: '../mymation/mymation' });
 
-        }
-      }); //获取我的剩余信息
+          }
+        }); //获取我的剩余信息
+      } else {
+        uni.showToast({
+          title: "请先登录!",
+          icon: 'none' });
+
+      }
     },
     eq: function eq() {
       var that = this;
@@ -546,9 +553,6 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getIndeinfo: function getIndeinfo() {var _this4 = this;
-      uni.showLoading({
-        title: "加载中" });
-
       this.list = [];
       var companyId = uni.getStorageSync('companyId');
       var userid = uni.getStorageSync('userId');
@@ -556,8 +560,7 @@ __webpack_require__.r(__webpack_exports__);
         userId: userid.userId }).
       then(function (res) {
         console.log(res[7]);
-        _this4.list = res.slice(0, 12);
-        uni.hideLoading();
+        _this4.list = res;
       });
       this.$http.postRequest('/notice/query').then(function (res) {
         _this4.noticeContent = res.noticeContent;

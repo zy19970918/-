@@ -207,13 +207,22 @@ var appId = 'wxd26f46560a42f999';var _default =
           success: function success(res) {
             console.log(res);
             console.log("成功");
-            if (res.data.status == 200) {
+            if (res.data.data.code == 0) {
+              uni.showToast({
+                title: "一级用户不可再分销!",
+                icon: 'none' });
+
+              uni.setStorageSync('flag', true);
+              uni.setStorageSync('userId', res.data.data.us1);
+            } else {
               uni.setStorageSync('flag', true);
               uni.setStorageSync('userId', res.data.data.user);
             }
-            uni.reLaunch({
-              url: '../index/index' });
+            setTimeout(function () {
+              uni.reLaunch({
+                url: '../index/index' });
 
+            }, 1000);
           } });
 
       } else {

@@ -5,7 +5,7 @@
 			<view class="content-box" :class="{'center':mode === 2}" >
 				<text class="icon icon-serach"></text>
 				<!-- HM修改 增加placeholder input confirm-type confirm-->
-				<input  :placeholder="placeholder" @input="inputChange"  confirm-type="search" @confirm="triggerConfirm" class="input" :class="{'center':!active && mode === 2}" :focus="isFocus" v-model="text" @focus="focus" @blur="blur"/>
+				<input  :placeholder="placeholder" @input="inputChange"  confirm-type="search" @confirm="triggerConfirm" class="input" :class="{'center':!active && mode === 2}" v-model="text" @focus="focus" @blur="blur"/>
 				<!-- <view v-if="!active && mode === 2" class="input sub" @click="getFocus">请输入搜索内容</view> -->
 				<!-- HM修改 @click换成@click.stop阻止冒泡 -->
 				<text v-if="isDelShow" class="icon icon-del"  @click.stop="clear"></text>

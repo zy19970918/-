@@ -30,7 +30,9 @@
 		</view>
 		<view class="list" style="padding-left: 80rpx;" v-for="(item,index) in list" :key='index'>
 			<view class="">
-				<view class="round" style="display: inline-block;"><image :src="item.wxPicture" style="height: 100%; width: 100%; border-radius: 50%;" mode=""></image></view>
+				<view class="round" style="display: inline-block;">
+					<image :src="item.wxPicture" style="height: 100%; width: 100%; border-radius: 50%;" mode=""></image>
+				</view>
 			</view>
 			<view class="" style="margin-right: 218rpx; margin-left: 20rpx;">
 				<view class="" style="font-size: 32rpx; color: #333333; font-weight: 600;">
@@ -53,38 +55,43 @@
 	export default {
 		data() {
 			return {
-				list:[],
-				falg:true
+				list: [],
+				falg: true
 			}
 		},
 		methods: {
 			gettuiguan() {
-				var userid=uni.getStorageSync('userId')
-				this.$http.postRequest('/user/extension',{userId:userid.userId}).then(res=>{this.list=res;console.log(res)})
+				var userid = uni.getStorageSync('userId')
+				this.$http.postRequest('/user/extension', {
+					userId: userid.userId
+				}).then(res => {
+					this.list = res;
+					console.log(res)
+				})
 			},
 			timepaixu() {
 				this.list.reverse()
 			},
-			moneypaixu(property){
-				this.falg=false
-				return function (a,b) {
-					var val1=a[property]
-					var val2=b[property]
-					return val1-val2
+			moneypaixu(property) {
+				this.falg = false
+				return function(a, b) {
+					var val1 = a[property]
+					var val2 = b[property]
+					return val1 - val2
 				}
 			},
-			moneypaixu2(property){
-				this.falg=true
-				return function (a,b) {
-					var val1=a[property]
-					var val2=b[property]
-					return val2-val1
+			moneypaixu2(property) {
+				this.falg = true
+				return function(a, b) {
+					var val1 = a[property]
+					var val2 = b[property]
+					return val2 - val1
 				}
 			},
 			moneyup() {
-				if(this.falg) {
+				if (this.falg) {
 					this.list.sort(this.moneypaixu('money'))
-				}else {
+				} else {
 					this.list.sort(this.moneypaixu2('money'))
 				}
 			},

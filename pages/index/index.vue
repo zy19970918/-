@@ -145,7 +145,7 @@
 					header: {
 						'content-type': 'application/x-www-form-urlencoded'
 					},
-					url: 'http://192.168.101.13:8080/pay/payMoney',
+					url: 'https://www.xn--4gqr6isbv1bn21d.com/api/pay/payMoney',
 					method: 'POST',
 					data: {
 						userId: userid.userId,
@@ -265,37 +265,44 @@
 			},
 			getmymation(item) {
 				var userid = uni.getStorageSync('userId')
-				this.$http.postRequest('/user/queryCountAndTime', {
-					userId: userid.userId
-				}).then(res => {
-					var time1 = new Date(`${res.msg.payTimeStr}`);
-					var time2 = new Date();
-					if (!res.msg.payTimeStr && !res.msg.browseCount) {
-						uni.showToast({
-							title: "你还不是会员",
-							icon: 'none'
-						})
-						this.cont = false
-						return false
-					} else {
-						this.cont = true
-					}
-					if (time1.getTime() <= time2.getTime()) {
-						uni.showToast({
-							title: "会员已到期",
-							icon: 'none'
-						})
-						this.cont = false
-						return false
-					} else {
-						this.cont = true
-					} //到期时间
-					if (item) {
-						uni.navigateTo({
-							url: '../mymation/mymation'
-						})
-					}
-				}) //获取我的剩余信息
+				if(userid) {
+					this.$http.postRequest('/user/queryCountAndTime', {
+						userId: userid.userId
+					}).then(res => {
+						var time1 = new Date(`${res.msg.payTimeStr}`);
+						var time2 = new Date();
+						if (!res.msg.payTimeStr && !res.msg.browseCount) {
+							uni.showToast({
+								title: "你还不是会员",
+								icon: 'none'
+							})
+							this.cont = false
+							return false
+						} else {
+							this.cont = true
+						}
+						if (time1.getTime() <= time2.getTime()) {
+							uni.showToast({
+								title: "会员已到期",
+								icon: 'none'
+							})
+							this.cont = false
+							return false
+						} else {
+							this.cont = true
+						} //到期时间
+						if (item) {
+							uni.navigateTo({
+								url: '../mymation/mymation'
+							})
+						}
+					}) //获取我的剩余信息
+				}else {
+					uni.showToast({
+						title:"请先登录!",
+						icon:'none'
+					})
+				}
 			},
 			eq() {
 				var that = this
@@ -401,9 +408,6 @@
 				}
 			},
 			getIndeinfo() {
-				uni.showLoading({
-					title:"加载中"
-				})
 				this.list = []
 				var companyId = uni.getStorageSync('companyId')
 				var userid = uni.getStorageSync('userId')
@@ -411,8 +415,7 @@
 					userId: userid.userId,
 				}).then(res => {
 					console.log(res[7])
-					this.list=res.slice(0,12)
-					uni.hideLoading()
+					this.list=res
 				})
 				this.$http.postRequest('/notice/query').then(res => {
 					this.noticeContent = res.noticeContent

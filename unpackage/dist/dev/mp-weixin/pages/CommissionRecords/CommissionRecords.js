@@ -183,6 +183,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 var _default =
 {
   data: function data() {
@@ -194,7 +196,12 @@ var _default =
   methods: {
     gettuiguan: function gettuiguan() {var _this = this;
       var userid = uni.getStorageSync('userId');
-      this.$http.postRequest('/user/extension', { userId: userid.userId }).then(function (res) {_this.list = res;console.log(res);});
+      this.$http.postRequest('/user/extension', {
+        userId: userid.userId }).
+      then(function (res) {
+        _this.list = res;
+        console.log(res);
+      });
     },
     timepaixu: function timepaixu() {
       this.list.reverse();

@@ -15,32 +15,32 @@
 	export default {
 		data() {
 			return {
-				iv:'',
-				encryptedData:''
+				iv: '',
+				encryptedData: ''
 			}
 		},
 		methods: {
 			onGetPhoneNumber(e) {
-				var that=this
-				that.encryptedData=e.detail.encryptedData
-				that.iv=e.detail.iv		
+				var that = this
+				that.encryptedData = e.detail.encryptedData
+				that.iv = e.detail.iv
 				wx.checkSession({
-				  success: function(){
-					that.wxadd()
-					console.log("有效")
-				  },
-				  fail: function(){
-				    // session_key 已经失效，需要重新执行登录流程
-				    uni.reLaunch({
-				    	url:'../login/login'
-				    }) //重新登录
-				  }
+					success: function() {
+						that.wxadd()
+						console.log("有效")
+					},
+					fail: function() {
+						// session_key 已经失效，需要重新执行登录流程
+						uni.reLaunch({
+							url: '../login/login'
+						}) //重新登录
+					}
 				})
-				
+
 			},
 			wxadd(pho) {
-				var that=this
-				uni.setStorageSync('flag',true)
+				var that = this
+				uni.setStorageSync('flag', true)
 				const scene = uni.getStorageSync('scene')
 				const sessionKey = uni.getStorageSync('session_key')
 				const nickName = uni.getStorageSync('userInfo').nickName
@@ -49,7 +49,7 @@
 				const wxProvince = uni.getStorageSync('userInfo').province
 				const wxCity = uni.getStorageSync('userInfo').city
 				const wxOpenId = uni.getStorageSync('openid')
-				if(scene) {
+				if (scene) {
 					uni.request({
 						url: "https://www.xn--4gqr6isbv1bn21d.com/api/user/save",
 						method: 'POST',
@@ -64,22 +64,31 @@
 							wxCity: wxCity,
 							openid: wxOpenId,
 							picture: picture,
-							sessionKey:sessionKey,
-							iv:that.iv,
-							encryptedData:that.encryptedData,
-							userId:scene,
-							scanCode:1
+							sessionKey: sessionKey,
+							iv: that.iv,
+							encryptedData: that.encryptedData,
+							userId: scene,
+							scanCode: 1
 						},
 						success(res) {
 							console.log(res)
 							console.log("成功")
-							if(res.data.status==200) {
-								uni.setStorageSync('flag',true)
-								uni.setStorageSync('userId',res.data.data.user)
+							if (res.data.data.code == 0) {
+								uni.showToast({
+									title: "一级用户不可再分销!",
+									icon: 'none'
+								})
+								uni.setStorageSync('flag', true)
+								uni.setStorageSync('userId', res.data.data.us1)
+							} else {
+								uni.setStorageSync('flag', true)
+								uni.setStorageSync('userId', res.data.data.user)
 							}
-							uni.reLaunch({
-								url:'../index/index'
-							})
+							setTimeout(function() {
+								uni.reLaunch({
+									url: '../index/index'
+								})
+							}, 1000)
 						}
 					})
 				} else {
@@ -97,19 +106,19 @@
 							wxCity: wxCity,
 							openid: wxOpenId,
 							picture: picture,
-							sessionKey:sessionKey,
-							iv:that.iv,
-							encryptedData:that.encryptedData,
+							sessionKey: sessionKey,
+							iv: that.iv,
+							encryptedData: that.encryptedData,
 						},
 						success(res) {
 							console.log(res)
 							console.log("成功")
-							if(res.data.status==200) {
-								uni.setStorageSync('flag',true)
-								uni.setStorageSync('userId',res.data.data.user)
+							if (res.data.status == 200) {
+								uni.setStorageSync('flag', true)
+								uni.setStorageSync('userId', res.data.data.user)
 							}
 							uni.reLaunch({
-								url:'../index/index'
+								url: '../index/index'
 							})
 						}
 					})

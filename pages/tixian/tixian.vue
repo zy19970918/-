@@ -38,7 +38,7 @@
 					uni.showModal({
 						title: "请先添加银行卡!",
 						confirmText: "添加",
-						showCancel:false,
+						showCancel: false,
 						success(res) {
 							if (res.confirm) {
 								uni.navigateTo({
@@ -66,14 +66,28 @@
 				}
 				if (that.bank.money < that.miniMoney) {
 					uni.showToast({
-						title: "不满足提现条件",
+						title: "佣金不足，不可提现!",
 						icon: 'none'
 					})
 					return false
 				}
-				if (parseInt(that.money) > parseInt(that.bank.money)||parseInt(that.money)==0) {
+				if (parseInt(that.money) > parseInt(that.bank.money)) {
 					uni.showToast({
-						title: "不满足提现条件",
+						title: "佣金不足",
+						icon: 'none'
+					})
+					return false
+				}
+				if (parseInt(that.money) == 0) {
+					uni.showToast({
+						title: "提现额不能为0",
+						icon: 'none'
+					})
+					return false
+				}
+				if (parseInt(that.money) < that.miniMoney) {
+					uni.showToast({
+						title: "未达到提现标准",
 						icon: 'none'
 					})
 					return false
@@ -111,7 +125,12 @@
 		onLoad(options) {
 			console.log(options)
 			this.bank = options
-			this.miniMoney = uni.getStorageSync('miniMoney')
+			// this.miniMoney = uni.getStorageSync('miniMoney')
+		},
+		onShow() {
+			this.$http.postRequest('/user/queryMoney').then(res => {
+				this.miniMoney = res.miniMoney
+			})
 		}
 	}
 </script>

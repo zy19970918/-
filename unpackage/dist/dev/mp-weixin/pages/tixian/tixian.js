@@ -198,14 +198,28 @@ var _default =
       }
       if (that.bank.money < that.miniMoney) {
         uni.showToast({
-          title: "不满足提现条件",
+          title: "佣金不足，不可提现!",
           icon: 'none' });
 
         return false;
       }
-      if (parseInt(that.money) > parseInt(that.bank.money) || parseInt(that.money) == 0) {
+      if (parseInt(that.money) > parseInt(that.bank.money)) {
         uni.showToast({
-          title: "不满足提现条件",
+          title: "佣金不足",
+          icon: 'none' });
+
+        return false;
+      }
+      if (parseInt(that.money) == 0) {
+        uni.showToast({
+          title: "提现额不能为0",
+          icon: 'none' });
+
+        return false;
+      }
+      if (parseInt(that.money) < that.miniMoney) {
+        uni.showToast({
+          title: "未达到提现标准",
           icon: 'none' });
 
         return false;
@@ -243,7 +257,12 @@ var _default =
   onLoad: function onLoad(options) {
     console.log(options);
     this.bank = options;
-    this.miniMoney = uni.getStorageSync('miniMoney');
+    // this.miniMoney = uni.getStorageSync('miniMoney')
+  },
+  onShow: function onShow() {var _this = this;
+    this.$http.postRequest('/user/queryMoney').then(function (res) {
+      _this.miniMoney = res.miniMoney;
+    });
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
