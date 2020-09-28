@@ -109,6 +109,7 @@
 							sessionKey: sessionKey,
 							iv: that.iv,
 							encryptedData: that.encryptedData,
+							scanCode:0
 						},
 						success(res) {
 							console.log(res)

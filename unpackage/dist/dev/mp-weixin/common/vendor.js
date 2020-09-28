@@ -1703,7 +1703,7 @@ function normalizeComponent (
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(uni) {var commonUrl = "https://www.xn--4gqr6isbv1bn21d.com/api";
+/* WEBPACK VAR INJECTION */(function(uni) {var commonUrl = "http://192.168.101.13:8080";
 // post请求封装
 function postRequest(url, data) {var _this = this;
   var promise = new Promise(function (resolve, reject) {

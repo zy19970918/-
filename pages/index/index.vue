@@ -23,7 +23,7 @@
 			<view class="" style="margin-top:15rpx;">
 				<mSearch style="display: inline-block;" @changes="change"></mSearch>
 				<view class="contry" style="display: inline-block;">
-					<view class="city" @click="eq"  style="display: inline-block; width: 100%; font-size: 30rpx; color: #333; text-align: center;">
+					<view class="city" @click="eq" style="display: inline-block; width: 100%; font-size: 30rpx; color: #333; text-align: center;">
 						{{city?city:'选择地区'}}
 					</view>
 					<!-- <text style="margin-left: 10rpx;">{{city}}</text> -->
@@ -154,16 +154,16 @@
 					},
 					success(res) {
 						console.log(res)
-						if(res.data.data.data==0) {
+						if (res.data.data.data == 0) {
 							uni.showToast({
-								title:"请先登录",
-								icon:'none'
+								title: "请先登录",
+								icon: 'none'
 							})
-							setTimeout(function () {
+							setTimeout(function() {
 								uni.navigateTo({
-									url:'../login/login'
+									url: '../login/login'
 								})
-							},1000)
+							}, 1000)
 						}
 						wx.requestPayment({
 							timeStamp: res.data.data.timeStamp,
@@ -190,54 +190,66 @@
 			},
 			toDetail(item) {
 				var that = this
-				var flag = uni.getStorageSync('flag')
-				var userInfo = uni.getStorageSync('userInfo')
-				wx.getSetting({
-					success: res => {
-						if (res.authSetting['scope.userInfo']) {
-							//已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-							if (!flag) {
-								uni.redirectTo({
-									url: '../login/login'
-								})
-							} else {
-								if (that.cont == false) {
-									uni.showModal({
-										title: "加入我们后，可查看更多，并使用功能!",
-										content: `支付${that.money.standMoney}元，加入我们!`,
-										cancelText: "暂不加入",
-										confirmText: "申请加入",
-										success(res) {
-											if (res.confirm) {
-												that.ADD()
-											} else {
-												console.log("取消")
-											}
-										}
-									})
-									return false
-								}
-								var companyId = uni.getStorageSync('companyId')
-								if (!companyId) {
-									uni.navigateTo({
-										url: '../mymation/mymation'
-									})
-
-									return false
-								}
-								uni.navigateTo({
-									url: `../detail/detail?companyId=${item}`
-								})
-							}
+				wx.getSystemInfo({
+					success(res) {
+						if (res.platform == "ios") {
+							uni.showToast({
+								title: "ios系统暂不支持使用",
+								icon: 'none'
+							})
 						} else {
-							console.log("未授权")
-							// 未授权，跳转到授权页面							
-							wx.redirectTo({
-								url: "../login/login"
+							var flag = uni.getStorageSync('flag')
+							var userInfo = uni.getStorageSync('userInfo')
+							wx.getSetting({
+								success: res => {
+									if (res.authSetting['scope.userInfo']) {
+										//已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+										if (!flag) {
+											uni.redirectTo({
+												url: '../login/login'
+											})
+										} else {
+											if (that.cont == false) {
+												uni.showModal({
+													title: "加入我们后，可查看更多，并使用功能!",
+													content: `支付${that.money.standMoney}元，加入我们!`,
+													cancelText: "暂不加入",
+													confirmText: "申请加入",
+													success(res) {
+														if (res.confirm) {
+															that.ADD()
+														} else {
+															console.log("取消")
+														}
+													}
+												})
+												return false
+											}
+											var companyId = uni.getStorageSync('companyId')
+											if (!companyId) {
+												uni.navigateTo({
+													url: '../mymation/mymation'
+												})
+
+												return false
+											}
+											uni.navigateTo({
+												url: `../detail/detail?companyId=${item}`
+											})
+										}
+									} else {
+										console.log("未授权")
+										// 未授权，跳转到授权页面							
+										wx.redirectTo({
+											url: "../login/login"
+										})
+									}
+								}
 							})
 						}
 					}
 				})
+
 
 
 			},
@@ -265,7 +277,7 @@
 			},
 			getmymation(item) {
 				var userid = uni.getStorageSync('userId')
-				if(userid) {
+				if (userid) {
 					this.$http.postRequest('/user/queryCountAndTime', {
 						userId: userid.userId
 					}).then(res => {
@@ -297,95 +309,77 @@
 							})
 						}
 					}) //获取我的剩余信息
-				}else {
+				} else {
 					uni.showToast({
-						title:"请先登录!",
-						icon:'none'
+						title: "请先登录!",
+						icon: 'none'
 					})
 				}
 			},
 			eq() {
 				var that = this
-				var flag = uni.getStorageSync('flag')
-				var userInfo = uni.getStorageSync('userInfo')
-				wx.getSetting({
-					success: res => {
-						if (res.authSetting['scope.userInfo']) {
-							//已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-							if (!flag) {
-								uni.redirectTo({
-									url: '../login/login'
-								})
-							} else {
-								var companyId = uni.getStorageSync('companyId')
-								if (that.cont == false) {
-									uni.showModal({
-										title: "加入我们后，可查看更多，并使用功能!",
-										content: `支付${that.money.standMoney}元,加入我们!`,
-										cancelText: "暂不加入",
-										confirmText: "申请加入",
-										success(res) {
-											if (res.confirm) {
-												that.ADD()
+				wx.getSystemInfo({
+					success(res) {
+						console.log(res)
+						if (res.platform == "ios") {
+							uni.showToast({
+								title: "ios系统暂不支持!",
+								icon:'none'
+							})
+						} else {
+							var flag = uni.getStorageSync('flag')
+							var userInfo = uni.getStorageSync('userInfo')
+							wx.getSetting({
+								success: res => {
+									if (res.authSetting['scope.userInfo']) {
+										//已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+										if (!flag) {
+											uni.redirectTo({
+												url: '../login/login'
+											})
+										} else {
+											var companyId = uni.getStorageSync('companyId')
+											if (that.cont == false) {
+												uni.showModal({
+													title: "加入我们后，可查看更多，并使用功能!",
+													content: `支付${that.money.standMoney}元,加入我们!`,
+													cancelText: "暂不加入",
+													confirmText: "申请加入",
+													success(res) {
+														if (res.confirm) {
+															that.ADD()
+														} else {
+															uni.showToast({
+																title: "取消支付",
+																icon: "none"
+															})
+														}
+													}
+												})
+												return false
+											} else if (!companyId) {
+												uni.navigateTo({
+													url: '../mymation/mymation'
+												})
 											} else {
-												uni.showToast({
-													title: "取消支付",
-													icon: "none"
+												uni.navigateTo({
+													url: "../Service_address_book/Service_address_book"
 												})
 											}
 										}
-									})
-									return false
-								} else if (!companyId) {
-									uni.navigateTo({
-										url: '../mymation/mymation'
-									})
-								} else {
-									uni.navigateTo({
-										url: "../Service_address_book/Service_address_book"
-									})
+									} else {
+										console.log("未授权")
+										// 未授权，跳转到授权页面							
+										wx.redirectTo({
+											url: "../login/login"
+										})
+									}
 								}
-							}
-						} else {
-							console.log("未授权")
-							// 未授权，跳转到授权页面							
-							wx.redirectTo({
-								url: "../login/login"
 							})
+
 						}
 					}
 				})
-
-				// var companyId = uni.getStorageSync('companyId')
-				// var that = this
-				// that.getuserInfo()
-				// if (that.cont == false) {
-				// 	uni.showModal({
-				// 		title: "加入我们后，可查看更多，并使用功能!",
-				// 		content: `支付${that.money.standMoney}元，开通${that.money.months}个月会员,可浏览${that.money.browseCount}条信息!`,
-				// 		cancelText: "暂不加入",
-				// 		confirmText: "申请加入",
-				// 		success(res) {
-				// 			if (res.confirm) {
-				// 				that.ADD()
-				// 			} else {
-				// 				uni.showToast({
-				// 					title: "取消支付",
-				// 					icon: "none"
-				// 				})
-				// 			}
-				// 		}
-				// 	})
-				// 	return false
-				// } else if (!companyId) {
-				// 	uni.navigateTo({
-				// 		url: '../mymation/mymation'
-				// 	})
-				// } else {
-				// 	uni.navigateTo({
-				// 		url: "../Service_address_book/Service_address_book"
-				// 	})
-				// }
 			},
 			ADD() {
 				var that = this
@@ -415,7 +409,7 @@
 					userId: userid.userId,
 				}).then(res => {
 					console.log(res[7])
-					this.list=res
+					this.list = res
 				})
 				this.$http.postRequest('/notice/query').then(res => {
 					this.noticeContent = res.noticeContent
@@ -429,77 +423,89 @@
 			},
 			guanzhu(item) { //关注
 				var that = this
-				var flag = uni.getStorageSync('flag')
-				var userInfo = uni.getStorageSync('userInfo')
-				wx.getSetting({
-					success: res => {
-						if (res.authSetting['scope.userInfo']) {
-							//已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-							if (!flag) {
-								uni.redirectTo({
-									url: '../login/login'
-								})
-							} else {
-								var companyId = uni.getStorageSync('companyId')
-								if (that.cont == false) {
-									uni.showModal({
-										title: "加入我们后，可查看更多，并使用功能!",
-										content: `支付${that.money.standMoney}元，加入我们!`,
-										cancelText: "暂不加入",
-										confirmText: "申请加入",
-										success(res) {
-											if (res.confirm) {
-												that.ADD()
-											} else {
-												uni.showToast({
-													title: "取消支付",
-													icon: "none"
-												})
-											}
-										}
-									})
-									return false
-								}
-								if (!companyId) {
-									uni.navigateTo({
-										url: '../mymation/mymation'
-									})
-
-									return false
-								}
-								var userid = uni.getStorageSync('userId')
-								this.$http.postRequest('/company/edit', {
-									companyId: item.companyId,
-									userId: userid.userId,
-									focusData: item.focusData
-								}).then(res => {
-									if (res.msg == 1) {
-										uni.showToast({
-											title: "关注成功",
-											success() {
-												item.focusData = 1
-											}
-										})
-									}
-									if (res.msg == 0) {
-										uni.showToast({
-											title: "取消关注",
-											success() {
-												item.focusData = 0
-											}
-										})
-									}
-								}) //
-							}
+				wx.getSystemInfo({
+					success(res) {
+						if (res.platform == "ios") {
+							uni.showToast({
+								title: "ios系统暂不支持使用",
+								icon: 'none'
+							})
 						} else {
-							console.log("未授权")
-							// 未授权，跳转到授权页面							
-							wx.redirectTo({
-								url: "../login/login"
+							var flag = uni.getStorageSync('flag')
+							var userInfo = uni.getStorageSync('userInfo')
+							wx.getSetting({
+								success: res => {
+									if (res.authSetting['scope.userInfo']) {
+										//已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+										if (!flag) {
+											uni.redirectTo({
+												url: '../login/login'
+											})
+										} else {
+											var companyId = uni.getStorageSync('companyId')
+											if (that.cont == false) {
+												uni.showModal({
+													title: "加入我们后，可查看更多，并使用功能!",
+													content: `支付${that.money.standMoney}元，加入我们!`,
+													cancelText: "暂不加入",
+													confirmText: "申请加入",
+													success(res) {
+														if (res.confirm) {
+															that.ADD()
+														} else {
+															uni.showToast({
+																title: "取消支付",
+																icon: "none"
+															})
+														}
+													}
+												})
+												return false
+											}
+											if (!companyId) {
+												uni.navigateTo({
+													url: '../mymation/mymation'
+												})
+
+												return false
+											}
+											var userid = uni.getStorageSync('userId')
+											this.$http.postRequest('/company/edit', {
+												companyId: item.companyId,
+												userId: userid.userId,
+												focusData: item.focusData
+											}).then(res => {
+												if (res.msg == 1) {
+													uni.showToast({
+														title: "关注成功",
+														success() {
+															item.focusData = 1
+														}
+													})
+												}
+												if (res.msg == 0) {
+													uni.showToast({
+														title: "取消关注",
+														success() {
+															item.focusData = 0
+														}
+													})
+												}
+											}) //
+										}
+									} else {
+										console.log("未授权")
+										// 未授权，跳转到授权页面							
+										wx.redirectTo({
+											url: "../login/login"
+										})
+									}
+								}
 							})
 						}
 					}
 				})
+
 
 
 			}
@@ -631,6 +637,7 @@
 		background: rgba(190, 142, 88, 1);
 		color: #FFFFFF;
 	}
+
 	.contry {
 		margin-right: 20rpx;
 		width: 188rpx;

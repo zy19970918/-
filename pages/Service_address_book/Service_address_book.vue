@@ -11,7 +11,7 @@
 			</view>
 		</view>
 		<view class="content_main">
-			<image :src="bannerImg" mode="scaleToFill"></image>
+			<image :src="bannerImg" mode="scaleToFill" @click="toApplets"></image>
 		</view>
 		<view class="content_footer">
 			<view class="footer">
@@ -132,6 +132,12 @@
 			},
 			openAddres() {
 				this.$refs.simpleAddress.open();
+			},
+			toApplets() {  //跳转小程序
+				wx.navigateToMiniProgram({
+					appId:'wxb31c921feae5104b',
+					envVersion:'2.0.0'
+				})
 			},
 			onConfirm(e) {
 				var that=this

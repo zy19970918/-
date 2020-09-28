@@ -242,7 +242,8 @@ var appId = 'wxd26f46560a42f999';var _default =
             picture: picture,
             sessionKey: sessionKey,
             iv: that.iv,
-            encryptedData: that.encryptedData },
+            encryptedData: that.encryptedData,
+            scanCode: 0 },
 
           success: function success(res) {
             console.log(res);

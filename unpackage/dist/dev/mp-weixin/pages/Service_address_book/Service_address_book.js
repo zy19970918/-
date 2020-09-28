@@ -269,6 +269,12 @@ __webpack_require__.r(__webpack_exports__);
     openAddres: function openAddres() {
       this.$refs.simpleAddress.open();
     },
+    toApplets: function toApplets() {//跳转小程序
+      wx.navigateToMiniProgram({
+        appId: 'wxb31c921feae5104b',
+        envVersion: '2.0.0' });
+
+    },
     onConfirm: function onConfirm(e) {
       var that = this;
       that.city = e.labelArr[1];

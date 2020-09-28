@@ -320,37 +320,69 @@ __webpack_require__.r(__webpack_exports__);
       var that = this;
       var companyId = uni.getStorageSync('companyId');
       var userid = uni.getStorageSync('userId');
-      this.$http.postRequest('/company/add', {
-        userId: userid.userId,
-        name: this.name,
-        jobName: this.job,
-        companyAddr: this.city,
-        province: that.proice,
-        city: that.citys,
-        detailAddr: this.detailadress,
-        phone: this.phone,
-        mobilePhone: this.mobilePhone,
-        wxNumber: this.wxchat,
-        qq: this.qq,
-        officialName: this.gngzonghao,
-        serviceScope: this.yewu,
-        companyName: this.companyName
-        // companyId:companyId,
-      }).then(function (res) {
-        console.log(res);
-        uni.setStorageSync('companyId', res.msg.companyId);
-        uni.showToast({
-          title: "保存成功",
-          success: function success() {
-            that.flag = true;
-            setTimeout(function () {
-              uni.navigateBack({
-                delta: -1 });
+      if (companyId) {
+        this.$http.postRequest('/company/add', {
+          userId: userid.userId,
+          name: this.name,
+          jobName: this.job,
+          companyAddr: this.city,
+          province: that.proice,
+          city: that.citys,
+          detailAddr: this.detailadress,
+          phone: this.phone,
+          mobilePhone: this.mobilePhone,
+          wxNumber: this.wxchat,
+          qq: this.qq,
+          officialName: this.gngzonghao,
+          serviceScope: this.yewu,
+          companyName: this.companyName,
+          companyId: companyId }).
+        then(function (res) {
+          uni.setStorageSync('companyId', res.msg.companyId);
+          uni.showToast({
+            title: "保存成功",
+            success: function success() {
+              that.flag = true;
+              setTimeout(function () {
+                uni.navigateBack({
+                  delta: -1 });
 
-            }, 1000);
-          } });
+              }, 1000);
+            } });
 
-      }); //修改用户信息
+        }); //修改用户信息
+      } else {
+        this.$http.postRequest('/company/add', {
+          userId: userid.userId,
+          name: this.name,
+          jobName: this.job,
+          companyAddr: this.city,
+          province: that.proice,
+          city: that.citys,
+          detailAddr: this.detailadress,
+          phone: this.phone,
+          mobilePhone: this.mobilePhone,
+          wxNumber: this.wxchat,
+          qq: this.qq,
+          officialName: this.gngzonghao,
+          serviceScope: this.yewu,
+          companyName: this.companyName
+          // companyId:companyId,
+        }).then(function (res) {
+          uni.setStorageSync('companyId', res.msg.companyId);
+          uni.showToast({
+            title: "保存成功",
+            success: function success() {
+              that.flag = true;
+              setTimeout(function () {
+                uni.navigateBack({
+                  delta: -1 });
+
+              }, 1000);
+            } });
+
+        }); //修改用户信息
+      }
     },
     getinfo: function getinfo() {var _this = this; //获取用户信息
       var companyId = uni.getStorageSync('companyId');
