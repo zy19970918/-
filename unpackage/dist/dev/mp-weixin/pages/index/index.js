@@ -339,7 +339,7 @@ __webpack_require__.r(__webpack_exports__);
         success: function success(res) {
           if (res.platform == "ios") {
             uni.showToast({
-              title: "ios系统暂不支持使用",
+              title: "由于相关规范，ios功能暂不可用",
               icon: 'none' });
 
           } else {
@@ -468,7 +468,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log(res);
           if (res.platform == "ios") {
             uni.showToast({
-              title: "ios系统暂不支持!",
+              title: "由于相关规范，ios功能暂不可用",
               icon: 'none' });
 
           } else {
@@ -547,6 +547,9 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getIndeinfo: function getIndeinfo() {var _this4 = this;
+      uni.showLoading({
+        title: "加载中..." });
+
       this.list = [];
       var companyId = uni.getStorageSync('companyId');
       var userid = uni.getStorageSync('userId');
@@ -555,6 +558,7 @@ __webpack_require__.r(__webpack_exports__);
       then(function (res) {
         console.log(res[7]);
         _this4.list = res;
+        uni.hideLoading();
       });
       this.$http.postRequest('/notice/query').then(function (res) {
         _this4.noticeContent = res.noticeContent;
@@ -572,7 +576,7 @@ __webpack_require__.r(__webpack_exports__);
         success: function success(res) {var _this5 = this;
           if (res.platform == "ios") {
             uni.showToast({
-              title: "ios系统暂不支持使用",
+              title: "由于相关规范，ios功能暂不可用",
               icon: 'none' });
 
           } else {
@@ -667,10 +671,10 @@ __webpack_require__.r(__webpack_exports__);
     // this.getuserInfo()
     this.getXieyi();
     this.getmymation();
-    // this.getIndeinfo()
+    this.getIndeinfo();
   },
   onShow: function onShow() {
-    this.getIndeinfo();
+    // this.getIndeinfo()
     this.getmymation();
   },
   onHide: function onHide() {

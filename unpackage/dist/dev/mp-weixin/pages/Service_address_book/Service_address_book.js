@@ -271,8 +271,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     toApplets: function toApplets() {//跳转小程序
       wx.navigateToMiniProgram({
-        appId: 'wxb31c921feae5104b',
-        envVersion: '2.0.0' });
+        appId: 'wxb31c921feae5104b' });
 
     },
     onConfirm: function onConfirm(e) {

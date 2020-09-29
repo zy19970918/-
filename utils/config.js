@@ -1,4 +1,4 @@
-const commonUrl = "http://192.168.101.13:8080"
+const commonUrl = "https://www.xn--4gqr6isbv1bn21d.com/api"
 // post请求封装
 function postRequest(url, data) {
 	var promise = new Promise((resolve, reject) => {
